@@ -1,0 +1,68 @@
+@import url('style.css');
+
+.search-section {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 5%;
+
+}
+
+.search-button {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0 10px;
+    display: flex;
+    align-items: center;
+}
+
+.search-button i {
+    color: white;
+    font-size: 1.1rem;
+    transition: color 0.2s;
+}
+
+.search-button:hover i {
+    color: #007bff;
+}
+
+input {
+    border-radius: 10px 10px 10px 10px;
+    padding: 5px;
+    width: 45%;
+}
+
+.driver-card-even img{
+    width: 85%;
+}
+
+.driver-card-odd img{
+    width: 85%;
+}
+
+.driver-card-even,
+.driver-card-odd {
+    display: flex;
+    margin: 0 auto;
+    grid-template-columns: 1fr 1fr;
+    margin-bottom: 3%;
+    width: 80%
+}
+
+.driver-card-even {
+    background-color: #4D3875;
+}
+
+.driver-card-odd {
+    background-color: #5722CA;
+}
+
+.driver-info {
+    grid-column: 2 / 2;
+    width: 100%;
+}
+
+.dropdown {
+    display: flex;
+    justify-content: flex-end;
+}
