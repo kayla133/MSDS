@@ -3,6 +3,11 @@ html {
     color: white;
 }
 
+a {
+    color: white;
+    text-decoration: none;
+}
+
 .header {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
@@ -12,32 +17,69 @@ html {
 .header img {
     grid-column: 1 / 2;
 }
-
 .header h1 {
     grid-column: 2 / 3;
     text-align: center;
 }
 
-.header nav {
-    grid-column: 3 / 4;
-    text-align: right;
+.burger {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-right: 20%;
+    position: relative;
 }
 
-a {
-    color: white;
-    text-decoration: none;
-}
 
 .menu-button {
     width: 40px;
     height: 40px;
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 6px;
+    color: white;
+    font-size: 1.2rem;
+    cursor: pointer;
 }
 
-.burger {
-    display: flex;
-    justify-content: flex-end;
-    margin-right: 20%;
+.menu-button:hover {
+    background: rgba(255,255,255,0.1);
 }
 
+.burger-nav {
+    display: none;
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    background-color: #3b3753;
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 8px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+    min-width: 160px;
+    z-index: 100;
+    overflow: hidden;
+}
+
+
+.burger-nav.open {
+    display: block;
+}
+
+.burger-nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 6px 0;
+}
+
+.burger-nav ul li a {
+    display: block;
+    padding: 10px 20px;
+    font-size: 0.95rem;
+    transition: background 0.15s;
+}
+
+.burger-nav ul li a:hover {
+    background-color: #5722CA;
+}
 
 
