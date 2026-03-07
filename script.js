@@ -99,7 +99,10 @@ document.addEventListener('DOMContentLoaded', () => {
 function plusSlides() {}
 function currentSlide() {}
 
+// ===============================
 // NAVIGATION MENU
+// ===============================
+
 const navItems = [
     { label: "Formula 1", href: "form.html" },
     { label: "NASCAR",    href: "form.html" },
@@ -118,7 +121,7 @@ document.getElementById("burger-btn").addEventListener("click", (e) => {
     document.getElementById("burger-nav").classList.toggle("open");
 });
 
-// Close when clicking outside
+// Closes when clicking outside
 document.addEventListener("click", () => {
     document.getElementById("burger-nav").classList.remove("open");
 });
