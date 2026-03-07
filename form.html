@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="sub.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <script src="script.js" defer></script>
-
 </head>
 
 <body>
@@ -33,94 +32,19 @@
 
     <!-- Search Section -->
     <section class="search-section">
-        <input type="text" class="search-bar" placeholder="Search drivers..." aria-label="Search drivers">
-        <button class="search-button" aria-label="Submit search">
+        <input type="text" id="driver-search" class="search-bar" placeholder="Search drivers..." aria-label="Search drivers">
+        <button class="search-button" id="search-btn" aria-label="Submit search">
             <i class="fa-solid fa-magnifying-glass"></i>
         </button>
-
     </section>
 
     <!-- Main Content -->
     <main>
-        <!-- Drivers Container -->
-        <div class="drivers-container">
-
-            <!-- Driver Card 1: Lando Norris example -->
-            <article class="driver-card-even">
-                <div class="driver-image">
-                    <img src="images/logo.png" alt="Lando Norris Formula One Driver" class="driver-photo">
-                </div>
-                <div class="driver-info">
-                    <h2 class="driver-name">
-                        <a href="#lando-norris">Lando Norris example</a>
-                    </h2>
-                    <div class="driver-description">
-                        <p class="description-text">#</p>
-                    </div>
-                    <ul class="driver-stats">
-                        <li class="stat-item">#</li>
-                        <li class="stat-item">#</li>
-                    </ul>
-                    <div class="dropdown">
-                        <button class="expand-button" aria-label="Expand driver details" aria-expanded="false">
-                            <span class="expand-icon">▼</span>
-                        </button>
-                    </div>
-                </div>
-            </article>
-
-            <!-- Driver Card 2: Max Verstappen example -->
-            <article class="driver-card-odd">
-                <div class="driver-image">
-                    <img src="images/logo.png" alt="Max Verstappen Formula One Driver" class="driver-photo">
-                </div>
-                <div class="driver-info">
-                    <h2 class="driver-name">
-                        <a href="#max-verstappen">Max Verstappen</a>
-                    </h2>
-                    <div class="driver-description">
-                        <p class="description-text">#</p>
-                    </div>
-                    <ul class="driver-stats">
-                        <li class="stat-item">#</li>
-                        <li class="stat-item">#</li>
-                    </ul>
-                    <div class="dropdown">
-                        <button class="expand-button" aria-label="Expand driver details" aria-expanded="false">
-                            <span class="expand-icon">▼</span>
-                        </button>
-                    </div>
-                </div>
-            </article>
-
-            <!-- Driver Card 3: Oscar Piastri example -->
-            <article class="driver-card-even">
-                <div class="driver-image">
-                    <img src="images/logo.png" alt="Oscar Piastri Formula One Driver" class="driver-photo">
-                </div>
-                <div class="driver-info">
-                    <h2 class="driver-name">
-                        <a href="#oscar-piastri">Oscar Piastri</a>
-                    </h2>
-                    <div class="driver-description">
-                        <p class="description-text">#</p>
-                    </div>
-                    <ul class="driver-stats">
-                        <li class="stat-item">#</li>
-                        <li class="stat-item">#</li>
-                    </ul>
-                    <div class="dropdown">
-                        <button class="expand-button" aria-label="Expand driver details" aria-expanded="false">
-                            <span class="expand-icon">▼</span>
-                        </button>
-                    </div>
-                </div>
-            </article>
-
+        <!-- Drivers Container — populated dynamically by script.js -->
+        <div class="drivers-container" id="drivers-container">
         </div>
     </main>
 
-    <script src="#"></script>
 </body>
 
 </html>
