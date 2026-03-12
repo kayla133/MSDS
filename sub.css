@@ -1,68 +1,103 @@
 @import url('style.css');
 
+body {
+    background-color: #2e2a3d;
+    font-family: Arial, sans-serif;
+    color: white;
+    margin: 0;
+}
+
 .search-section {
     display: flex;
     justify-content: center;
-    margin-bottom: 5%;
-
-}
-
-.search-button {
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    padding: 0 10px;
-    display: flex;
-    align-items: center;
-}
-
-.search-button i {
-    color: white;
-    font-size: 1.1rem;
-    transition: color 0.2s;
-}
-
-.search-button:hover i {
-    color: #007bff;
+    margin-bottom: 30px;
+    gap: 10px;
 }
 
 input {
-    border-radius: 10px 10px 10px 10px;
-    padding: 5px;
+    border-radius: 8px;
+    padding: 10px;
     width: 45%;
+    border: 1px solid #ccc;
 }
 
-.driver-card-even img{
-    width: 85%;
+.search-button {
+    background: #5722CA;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    padding: 0 15px;
 }
 
-.driver-card-odd img{
-    width: 85%;
-}
-
-.driver-card-even,
-.driver-card-odd {
+.drivers-container {
     display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 80%;
     margin: 0 auto;
-    grid-template-columns: 1fr 1fr;
-    margin-bottom: 3%;
-    width: 80%
 }
 
-.driver-card-even {
-    background-color: #4D3875;
+.driver-card-even, .driver-card-odd {
+    display: flex;
+    align-items: center;
+    padding: 15px 25px;
+    position: relative;
+    border-radius: 4px;
+    min-height: 120px;
 }
 
-.driver-card-odd {
-    background-color: #5722CA;
+.driver-card-even { background-color: #4D3875; }
+.driver-card-odd { background-color: #5722CA; }
+
+.driver-image {
+    width: 120px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: flex-end;
+}
+
+.driver-photo {
+    width: 100%;
+    height: auto;
+    display: block;
 }
 
 .driver-info {
-    grid-column: 2 / 2;
-    width: 100%;
+    flex-grow: 1;
+    padding-left: 20px;
+}
+
+.driver-name a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.6rem;
+    margin: 0;
+}
+
+.driver-description .description-text {
+    color: white !important; /* Forces team text to be white */
+    margin: 5px 0;
+    font-size: 1rem;
 }
 
 .dropdown {
-    display: flex;
-    justify-content: flex-end;
+    position: absolute;
+    bottom: 10px;
+    right: 15px;
+}
+
+.expand-button {
+    background: #000;
+    color: white;
+    border: none;
+    padding: 2px 6px;
+    cursor: pointer;
+    font-size: 10px;
+}
+
+.driver-stats {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid rgba(255,255,255,0.2);
+    list-style: none;
 }

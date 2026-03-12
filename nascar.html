@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NASCAR Drivers</title>
+    <link rel="stylesheet" href="sub.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="script.js"></script>
+</head>
+<body>
+    <header>
+        <div class="header">
+            <div class="logo">
+                <a href="#home">
+                    <img src="images/logo.png" alt="MSDI Motorsport Logo">
+                </a>
+            </div>
+            <h1>NASCAR Drivers</h1>
+            <div class="burger">
+                <button class="menu-button" id="burger-btn" aria-label="Menu">☰</button>
+                <nav class="burger-nav" id="burger-nav">
+                    <ul id="nav-list">
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <section class="search-section">
+        <input type="text" id="driver-search" placeholder="Search drivers or teams...">
+        <button id="search-btn" class="search-button">
+            <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+    </section>
+
+    <main>
+        <div id="drivers-container" class="drivers-container">
+            </div>
+    </main>
+
+    <script src="nascar.js"></script>
+
+</body>
+</html>

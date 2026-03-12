@@ -1,0 +1,335 @@
+[
+  {
+    "driver_number": 1,
+    "first_name": "Ross",
+    "last_name": "Chastain",
+    "team_name": "Trackhouse Racing",
+    "team_colour": "D1D3D4",
+    "name_acronym": "CHA",
+    "headshot_url": "https://static.nascar.com/wp-content/uploads/sites/7/2024/01/Ross-Chastain-Headshot.png"
+  },
+  {
+    "driver_number": 2,
+    "first_name": "Austin",
+    "last_name": "Cindric",
+    "team_name": "Team Penske",
+    "team_colour": "FFEE00",
+    "name_acronym": "CIN",
+    "headshot_url": "https://static.nascar.com/wp-content/uploads/sites/7/2024/01/Austin-Cindric-Headshot.png"
+  },
+  {
+    "driver_number": 3,
+    "first_name": "Austin",
+    "last_name": "Dillon",
+    "team_name": "Richard Childress Racing",
+    "team_colour": "EF3124",
+    "name_acronym": "DIL",
+    "headshot_url": "https://static.nascar.com/wp-content/uploads/sites/7/2024/01/Austin-Dillon-Headshot.png"
+  },
+  {
+    "driver_number": 4,
+    "first_name": "Noah",
+    "last_name": "Gragson",
+    "team_name": "Front Row Motorsports",
+    "team_colour": "F3DB00",
+    "name_acronym": "GRA",
+    "headshot_url": "https://static.nascar.com/wp-content/uploads/sites/7/2024/01/Noah-Gragson-Headshot.png"
+  },
+  {
+    "driver_number": 5,
+    "first_name": "Kyle",
+    "last_name": "Larson",
+    "team_name": "Hendrick Motorsports",
+    "team_colour": "00529B",
+    "name_acronym": "LAR",
+    "headshot_url": "https://static.nascar.com/wp-content/uploads/sites/7/2024/01/Kyle-Larson-Headshot.png"
+  },
+  {
+    "driver_number": 6,
+    "first_name": "Brad",
+    "last_name": "Keselowski",
+    "team_name": "RFK Racing",
+    "team_colour": "FFFFFF",
+    "name_acronym": "KES",
+    "headshot_url": "https://static.nascar.com/wp-content/uploads/sites/7/2024/01/Brad-Keselowski-Headshot.png"
+  },
+  {
+    "driver_number": 7,
+    "first_name": "Daniel",
+    "last_name": "Suárez",
+    "team_name": "Spire Motorsports",
+    "team_colour": "FF5D00",
+    "name_acronym": "SUA",
+    "headshot_url": "https://static.nascar.com/wp-content/uploads/sites/7/2024/01/Daniel-Suarez-Headshot.png"
+  },
+  {
+    "driver_number": 8,
+    "first_name": "Kyle",
+    "last_name": "Busch",
+    "team_name": "Richard Childress Racing",
+    "team_colour": "EF3124",
+    "name_acronym": "BUS",
+    "headshot_url": "https://static.nascar.com/wp-content/uploads/sites/7/2024/01/Kyle-Busch-Headshot.png"
+  },
+  {
+    "driver_number": 9,
+    "first_name": "Chase",
+    "last_name": "Elliott",
+    "team_name": "Hendrick Motorsports",
+    "team_colour": "F3DB00",
+    "name_acronym": "ELL",
+    "headshot_url": "https://static.nascar.com/wp-content/uploads/sites/7/2024/01/Chase-Elliott-Headshot.png"
+  },
+  {
+    "driver_number": 10,
+    "first_name": "Ty",
+    "last_name": "Dillon",
+    "team_name": "Kaulig Racing",
+    "team_colour": "000000",
+    "name_acronym": "DIL",
+    "headshot_url": "https://static.nascar.com/wp-content/uploads/sites/7/2024/01/Ty-Dillon-Headshot.png"
+  },
+  {
+    "driver_number": 11,
+    "first_name": "Denny",
+    "last_name": "Hamlin",
+    "team_name": "Joe Gibbs Racing",
+    "team_colour": "EF3124",
+    "name_acronym": "HAM",
+    "headshot_url": "https://static.nascar.com/wp-content/uploads/sites/7/2024/01/Denny-Hamlin-Headshot.png"
+  },
+  {
+    "driver_number": 12,
+    "first_name": "Ryan",
+    "last_name": "Blaney",
+    "team_name": "Team Penske",
+    "team_colour": "FFEE00",
+    "name_acronym": "BLA",
+    "headshot_url": "https://static.nascar.com/wp-content/uploads/sites/7/2024/01/Ryan-Blaney-Headshot.png"
+  },
+  {
+    "driver_number": 16,
+    "first_name": "A.J.",
+    "last_name": "Allmendinger",
+    "team_name": "Kaulig Racing",
+    "team_colour": "000000",
+    "name_acronym": "ALL",
+    "headshot_url": "https://static.nascar.com/wp-content/uploads/sites/7/2024/01/AJ-Allmendinger-Headshot.png"
+  },
+  {
+    "driver_number": 17,
+    "first_name": "Chris",
+    "last_name": "Buescher",
+    "team_name": "RFK Racing",
+    "team_colour": "FFFFFF",
+    "name_acronym": "BUE",
+    "headshot_url": "https://static.nascar.com/wp-content/uploads/sites/7/2024/01/Chris-Buescher-Headshot.png"
+  },
+  {
+    "driver_number": 19,
+    "first_name": "Chase",
+    "last_name": "Briscoe",
+    "team_name": "Joe Gibbs Racing",
+    "team_colour": "EF3124",
+    "name_acronym": "BRI",
+    "headshot_url": "https://static.nascar.com/wp-content/uploads/sites/7/2024/01/Chase-Briscoe-Headshot.png"
+  },
+  {
+    "driver_number": 20,
+    "first_name": "Christopher",
+    "last_name": "Bell",
+    "team_name": "Joe Gibbs Racing",
+    "team_colour": "EF3124",
+    "name_acronym": "BEL",
+    "headshot_url": "https://static.nascar.com/wp-content/uploads/sites/7/2024/01/Christopher-Bell-Headshot.png"
+  },
+  {
+    "driver_number": 21,
+    "first_name": "Josh",
+    "last_name": "Berry",
+    "team_name": "Wood Brothers Racing",
+    "team_colour": "EF3124",
+    "name_acronym": "BER",
+    "headshot_url": "https://static.nascar.com/wp-content/uploads/sites/7/2024/01/Josh-Berry-Headshot.png"
+  },
+  {
+    "driver_number": 22,
+    "first_name": "Joey",
+    "last_name": "Logano",
+    "team_name": "Team Penske",
+    "team_colour": "FFEE00",
+    "name_acronym": "LOG",
+    "headshot_url": "https://static.nascar.com/wp-content/uploads/sites/7/2024/01/Joey-Logano-Headshot.png"
+  },
+  {
+    "driver_number": 23,
+    "first_name": "Bubba",
+    "last_name": "Wallace",
+    "team_name": "23XI Racing",
+    "team_colour": "FF0000",
+    "name_acronym": "WAL",
+    "headshot_url": "https://static.nascar.com/wp-content/uploads/sites/7/2024/01/Bubba-Wallace-Headshot.png"
+  },
+  {
+    "driver_number": 24,
+    "first_name": "William",
+    "last_name": "Byron",
+    "team_name": "Hendrick Motorsports",
+    "team_colour": "231F20",
+    "name_acronym": "BYR",
+    "headshot_url": "https://static.nascar.com/wp-content/uploads/sites/7/2024/01/William-Byron-Headshot.png"
+  },
+  {
+    "driver_number": 34,
+    "first_name": "Todd",
+    "last_name": "Gilliland",
+    "team_name": "Front Row Motorsports",
+    "team_colour": "000000",
+    "name_acronym": "GIL",
+    "headshot_url": "https://static.nascar.com/wp-content/uploads/sites/7/2024/01/Todd-Gilliland-Headshot.png"
+  },
+  {
+    "driver_number": 35,
+    "first_name": "Riley",
+    "last_name": "Herbst",
+    "team_name": "23XI Racing",
+    "team_colour": "FF0000",
+    "name_acronym": "HER",
+    "headshot_url": "https://static.nascar.com/wp-content/uploads/sites/7/2024/01/Riley-Herbst-Headshot.png"
+  },
+  {
+    "driver_number": 38,
+    "first_name": "Zane",
+    "last_name": "Smith",
+    "team_name": "Front Row Motorsports",
+    "team_colour": "000000",
+    "name_acronym": "SMI",
+    "headshot_url": "https://static.nascar.com/wp-content/uploads/sites/7/2024/01/Zane-Smith-Headshot.png"
+  },
+  {
+    "driver_number": 41,
+    "first_name": "Cole",
+    "last_name": "Custer",
+    "team_name": "Haas Factory Team",
+    "team_colour": "FF0000",
+    "name_acronym": "CUS",
+    "headshot_url": "https://static.nascar.com/wp-content/uploads/sites/7/2024/01/Cole-Custer-Headshot.png"
+  },
+  {
+    "driver_number": 42,
+    "first_name": "John Hunter",
+    "last_name": "Nemechek",
+    "team_name": "Legacy Motor Club",
+    "team_colour": "D1D3D4",
+    "name_acronym": "NEM",
+    "headshot_url": "https://static.nascar.com/wp-content/uploads/sites/7/2024/01/John-Hunter-Nemechek-Headshot.png"
+  },
+  {
+    "driver_number": 43,
+    "first_name": "Erik",
+    "last_name": "Jones",
+    "team_name": "Legacy Motor Club",
+    "team_colour": "D1D3D4",
+    "name_acronym": "JON",
+    "headshot_url": "https://static.nascar.com/wp-content/uploads/sites/7/2024/01/Erik-Jones-Headshot.png"
+  },
+  {
+    "driver_number": 45,
+    "first_name": "Tyler",
+    "last_name": "Reddick",
+    "team_name": "23XI Racing",
+    "team_colour": "FF0000",
+    "name_acronym": "RED",
+    "headshot_url": "https://static.nascar.com/wp-content/uploads/sites/7/2024/01/Tyler-Reddick-Headshot.png"
+  },
+  {
+    "driver_number": 47,
+    "first_name": "Ricky",
+    "last_name": "Stenhouse Jr.",
+    "team_name": "HYAK Motorsports",
+    "team_colour": "00529B",
+    "name_acronym": "STE",
+    "headshot_url": "https://static.nascar.com/wp-content/uploads/sites/7/2024/01/Ricky-Stenhouse-Jr-Headshot.png"
+  },
+  {
+    "driver_number": 48,
+    "first_name": "Alex",
+    "last_name": "Bowman",
+    "team_name": "Hendrick Motorsports",
+    "team_colour": "A7A9AC",
+    "name_acronym": "BOW",
+    "headshot_url": "https://static.nascar.com/wp-content/uploads/sites/7/2024/01/Alex-Bowman-Headshot.png"
+  },
+  {
+    "driver_number": 51,
+    "first_name": "Cody",
+    "last_name": "Ware",
+    "team_name": "Rick Ware Racing",
+    "team_colour": "000000",
+    "name_acronym": "WAR",
+    "headshot_url": "https://static.nascar.com/wp-content/uploads/sites/7/2024/01/Cody-Ware-Headshot.png"
+  },
+  {
+    "driver_number": 54,
+    "first_name": "Ty",
+    "last_name": "Gibbs",
+    "team_name": "Joe Gibbs Racing",
+    "team_colour": "EF3124",
+    "name_acronym": "GIB",
+    "headshot_url": "https://static.nascar.com/wp-content/uploads/sites/7/2024/01/Ty-Gibbs-Headshot.png"
+  },
+  {
+    "driver_number": 60,
+    "first_name": "Ryan",
+    "last_name": "Preece",
+    "team_name": "RFK Racing",
+    "team_colour": "FFFFFF",
+    "name_acronym": "PRE",
+    "headshot_url": "https://static.nascar.com/wp-content/uploads/sites/7/2024/01/Ryan-Preece-Headshot.png"
+  },
+  {
+    "driver_number": 71,
+    "first_name": "Michael",
+    "last_name": "McDowell",
+    "team_name": "Spire Motorsports",
+    "team_colour": "00529B",
+    "name_acronym": "MCD",
+    "headshot_url": "https://static.nascar.com/wp-content/uploads/sites/7/2024/01/Michael-McDowell-Headshot.png"
+  },
+  {
+    "driver_number": 77,
+    "first_name": "Carson",
+    "last_name": "Hocevar",
+    "team_name": "Spire Motorsports",
+    "team_colour": "00529B",
+    "name_acronym": "HOC",
+    "headshot_url": "https://static.nascar.com/wp-content/uploads/sites/7/2024/01/Carson-Hocevar-Headshot.png"
+  },
+  {
+    "driver_number": 88,
+    "first_name": "Connor",
+    "last_name": "Zilisch",
+    "team_name": "Trackhouse Racing",
+    "team_colour": "D1D3D4",
+    "name_acronym": "ZIL",
+    "headshot_url": "https://static.nascar.com/wp-content/uploads/sites/7/2024/01/Connor-Zilisch-Headshot.png"
+  },
+  {
+    "driver_number": 97,
+    "first_name": "Shane",
+    "last_name": "van Gisbergen",
+    "team_name": "Trackhouse Racing",
+    "team_colour": "D1D3D4",
+    "name_acronym": "SVG",
+    "headshot_url": "https://static.nascar.com/wp-content/uploads/sites/7/2024/01/Shane-van-Gisbergen-Headshot.png"
+  },
+  {
+    "driver_number": 99,
+    "first_name": "Corey",
+    "last_name": "LaJoie",
+    "team_name": "RFK Racing",
+    "team_colour": "FFFFFF",
+    "name_acronym": "LAJ",
+    "headshot_url": "https://static.nascar.com/wp-content/uploads/sites/7/2024/01/Corey-LaJoie-Headshot.png"
+  }
+]
