@@ -1,14 +1,99 @@
-// Function to build each card
+/**
+ * NASCAR DRIVER CARDS & SEARCH
+ */
+
+// 1. GLOBAL STATE
+let allDrivers = [];
+
+// 2. CORE FUNCTIONS
+async function init() {
+    const container = document.getElementById('drivers-container');
+    const searchInput = document.getElementById('driver-search');
+    const searchBtn = document.getElementById('search-btn');
+
+    try {
+        // Load the data
+        const response = await fetch('nascar.json');
+        if (!response.ok) throw new Error('Network response was not ok');
+        
+        allDrivers = await response.json();
+        
+        // Initial Render
+        renderCards(allDrivers);
+
+        // Setup Search Listeners
+        if (searchInput) {
+            searchInput.addEventListener('input', () => {
+                const query = searchInput.value.trim().toLowerCase();
+                filterAndRender(query);
+            });
+
+            searchInput.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') {
+                    const query = searchInput.value.trim().toLowerCase();
+                    filterAndRender(query);
+                }
+            });
+        }
+
+        if (searchBtn) {
+            searchBtn.addEventListener('click', () => {
+                const query = searchInput.value.trim().toLowerCase();
+                filterAndRender(query);
+            });
+        }
+
+    } catch (e) {
+        console.error("Failed to load drivers:", e);
+        if (container) {
+            container.innerHTML = `<p class="error">Error loading driver data. Please try again later.</p>`;
+        }
+    }
+}
+
+// 3. FILTER LOGIC
+function filterAndRender(query) {
+    const filtered = allDrivers.filter(d => {
+        return (
+            d.full_name.toLowerCase().includes(query) ||
+            d.team_name.toLowerCase().includes(query) ||
+            d.driver_number.toString().includes(query) ||
+            d.name_acronym.toLowerCase().includes(query)
+        );
+    });
+    renderCards(filtered, query);
+}
+
+// 4. RENDERING LOGIC
+function renderCards(drivers, query = '') {
+    const container = document.getElementById('drivers-container');
+    if (!container) return;
+
+    container.innerHTML = '';
+
+    if (drivers.length === 0) {
+        container.innerHTML = `
+            <div class="no-results" style="grid-column: 1/-1; text-align: center; padding: 2rem;">
+                <p>No drivers found matching "<strong>${query}</strong>"</p>
+            </div>`;
+        return;
+    }
+
+    drivers.forEach((driver, index) => {
+        container.appendChild(buildNASCARDriverCard(driver, index));
+    });
+}
+
 function buildNASCARDriverCard(driver, index) {
     const cardClass = index % 2 === 0 ? 'driver-card-even' : 'driver-card-odd';
     const anchorId = driver.last_name.toLowerCase();
     const teamColour = driver.team_colour ? `#${driver.team_colour}` : '#ffffff';
-
-    // Image Proxy Fix: Prepends a proxy service to bypass hotlinking blocks
+    
+    // Image Proxy to prevent hotlinking blocks
     const proxiedImage = `https://images.weserv.nl/?url=${driver.headshot_url.replace('https://', '')}`;
 
     const article = document.createElement('article');
-    article.className = cardClass;
+    article.className = `driver-card ${cardClass}`; // Added generic class for easier CSS
     article.id = anchorId;
 
     article.innerHTML = `
@@ -54,37 +139,9 @@ function buildNASCARDriverCard(driver, index) {
     return article;
 }
 
-// Function to render all cards
-function renderCards(drivers) {
-    const container = document.getElementById('drivers-container');
-    container.innerHTML = '';
-    drivers.forEach((driver, i) => {
-        container.appendChild(buildNASCARDriverCard(driver, i));
-    });
+// 5. RUN ON LOAD
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+} else {
+    init();
 }
-
-// Fetch and Search Logic
-let allDrivers = [];
-
-async function init() {
-    try {
-        const response = await fetch('nascar.json');
-        allDrivers = await response.json();
-        renderCards(allDrivers);
-    } catch (e) {
-        console.error("Failed to load drivers", e);
-    }
-}
-
-// Basic search functionality
-document.getElementById('driver-search').addEventListener('input', (e) => {
-    const term = e.target.value.toLowerCase();
-    const filtered = allDrivers.filter(d => 
-        d.full_name.toLowerCase().includes(term) || 
-        d.team_name.toLowerCase().includes(term) ||
-        d.driver_number.toString() === term
-    );
-    renderCards(filtered);
-});
-
-document.addEventListener('DOMContentLoaded', init);
