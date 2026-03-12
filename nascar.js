@@ -1,142 +1,90 @@
-[
-  {
-    "meeting_key": 2026,
-    "session_key": 6001,
-    "driver_number": 1,
-    "broadcast_name": "R CHASTAIN",
-    "full_name": "Ross CHASTAIN",
-    "name_acronym": "CHA",
-    "team_name": "Trackhouse Racing",
-    "team_colour": "000000",
-    "first_name": "Ross",
-    "last_name": "Chastain",
-    "headshot_url": "https://static.nascar.com/wp-content/uploads/sites/7/2024/01/Ross-Chastain-Headshot.png",
-    "country_code": "USA"
-  },
-  {
-    "meeting_key": 2026,
-    "session_key": 6001,
-    "driver_number": 5,
-    "broadcast_name": "K LARSON",
-    "full_name": "Kyle LARSON",
-    "name_acronym": "LAR",
-    "team_name": "Hendrick Motorsports",
-    "team_colour": "00529B",
-    "first_name": "Kyle",
-    "last_name": "Larson",
-    "headshot_url": "https://static.nascar.com/wp-content/uploads/sites/7/2024/01/Kyle-Larson-Headshot.png",
-    "country_code": "USA"
-  },
-  {
-    "meeting_key": 2026,
-    "session_key": 6001,
-    "driver_number": 9,
-    "broadcast_name": "C ELLIOTT",
-    "full_name": "Chase ELLIOTT",
-    "name_acronym": "ELL",
-    "team_name": "Hendrick Motorsports",
-    "team_colour": "F3DB00",
-    "first_name": "Chase",
-    "last_name": "Elliott",
-    "headshot_url": "https://static.nascar.com/wp-content/uploads/sites/7/2024/01/Chase-Elliott-Headshot.png",
-    "country_code": "USA"
-  },
-  {
-    "meeting_key": 2026,
-    "session_key": 6001,
-    "driver_number": 11,
-    "broadcast_name": "D HAMLIN",
-    "full_name": "Denny HAMLIN",
-    "name_acronym": "HAM",
-    "team_name": "Joe Gibbs Racing",
-    "team_colour": "111111",
-    "first_name": "Denny",
-    "last_name": "Hamlin",
-    "headshot_url": "https://static.nascar.com/wp-content/uploads/sites/7/2024/01/Denny-Hamlin-Headshot.png",
-    "country_code": "USA"
-  },
-  {
-    "meeting_key": 2026,
-    "session_key": 6001,
-    "driver_number": 12,
-    "broadcast_name": "R BLANEY",
-    "full_name": "Ryan BLANEY",
-    "name_acronym": "BLA",
-    "team_name": "Team Penske",
-    "team_colour": "FFEE00",
-    "first_name": "Ryan",
-    "last_name": "Blaney",
-    "headshot_url": "https://static.nascar.com/wp-content/uploads/sites/7/2024/01/Ryan-Blaney-Headshot.png",
-    "country_code": "USA"
-  },
-  {
-    "meeting_key": 2026,
-    "session_key": 6001,
-    "driver_number": 22,
-    "broadcast_name": "J LOGANO",
-    "full_name": "Joey LOGANO",
-    "name_acronym": "LOG",
-    "team_name": "Team Penske",
-    "team_colour": "EE1C25",
-    "first_name": "Joey",
-    "last_name": "Logano",
-    "headshot_url": "https://static.nascar.com/wp-content/uploads/sites/7/2024/01/Joey-Logano-Headshot.png",
-    "country_code": "USA"
-  },
-  {
-    "meeting_key": 2026,
-    "session_key": 6001,
-    "driver_number": 24,
-    "broadcast_name": "W BYRON",
-    "full_name": "William BYRON",
-    "name_acronym": "BYR",
-    "team_name": "Hendrick Motorsports",
-    "team_colour": "231F20",
-    "first_name": "William",
-    "last_name": "Byron",
-    "headshot_url": "https://static.nascar.com/wp-content/uploads/sites/7/2024/01/William-Byron-Headshot.png",
-    "country_code": "USA"
-  },
-  {
-    "meeting_key": 2026,
-    "session_key": 6001,
-    "driver_number": 45,
-    "broadcast_name": "T REDDICK",
-    "full_name": "Tyler REDDICK",
-    "name_acronym": "RED",
-    "team_name": "23XI Racing",
-    "team_colour": "FF0000",
-    "first_name": "Tyler",
-    "last_name": "Reddick",
-    "headshot_url": "https://static.nascar.com/wp-content/uploads/sites/7/2024/01/Tyler-Reddick-Headshot.png",
-    "country_code": "USA"
-  },
-  {
-    "meeting_key": 2026,
-    "session_key": 6001,
-    "driver_number": 48,
-    "broadcast_name": "A BOWMAN",
-    "full_name": "Alex BOWMAN",
-    "name_acronym": "BOW",
-    "team_name": "Hendrick Motorsports",
-    "team_colour": "A7A9AC",
-    "first_name": "Alex",
-    "last_name": "Bowman",
-    "headshot_url": "https://static.nascar.com/wp-content/uploads/sites/7/2024/01/Alex-Bowman-Headshot.png",
-    "country_code": "USA"
-  },
-  {
-    "meeting_key": 2026,
-    "session_key": 6001,
-    "driver_number": 54,
-    "broadcast_name": "T GIBBS",
-    "full_name": "Ty GIBBS",
-    "name_acronym": "GIB",
-    "team_name": "Joe Gibbs Racing",
-    "team_colour": "585858",
-    "first_name": "Ty",
-    "last_name": "Gibbs",
-    "headshot_url": "https://static.nascar.com/wp-content/uploads/sites/7/2024/01/Ty-Gibbs-Headshot.png",
-    "country_code": "USA"
-  }
-]
+// Function to build each card
+function buildNASCARDriverCard(driver, index) {
+    const cardClass = index % 2 === 0 ? 'driver-card-even' : 'driver-card-odd';
+    const anchorId = driver.last_name.toLowerCase();
+    const teamColour = driver.team_colour ? `#${driver.team_colour}` : '#ffffff';
+
+    // Image Proxy Fix: Prepends a proxy service to bypass hotlinking blocks
+    const proxiedImage = `https://images.weserv.nl/?url=${driver.headshot_url.replace('https://', '')}`;
+
+    const article = document.createElement('article');
+    article.className = cardClass;
+    article.id = anchorId;
+
+    article.innerHTML = `
+        <div class="driver-image">
+            <img src="${proxiedImage}" 
+                 alt="${driver.full_name}" 
+                 class="driver-photo" 
+                 onerror="this.src='images/logo.png'">
+        </div>
+        <div class="driver-info" style="border-left: 5px solid ${teamColour};">
+            <h2 class="driver-name">
+                <a href="#${anchorId}">
+                    ${driver.first_name} <span style="text-transform: uppercase; font-weight: 900;">${driver.last_name}</span>
+                </a>
+            </h2>
+            <div class="driver-description">
+                <p class="description-text">${driver.team_name}</p>
+                <p class="description-text">No. ${driver.driver_number} — ${driver.name_acronym}</p>
+            </div>
+            <ul class="driver-stats" style="display: none;">
+                <li>Series: NASCAR Cup</li>
+                <li>Country: ${driver.country_code}</li>
+            </ul>
+        </div>
+        <div class="dropdown">
+            <button class="expand-button" aria-expanded="false">
+                <span class="expand-icon">▼</span>
+            </button>
+        </div>
+    `;
+
+    // Dropdown toggle logic
+    const btn = article.querySelector('.expand-button');
+    const stats = article.querySelector('.driver-stats');
+    
+    btn.addEventListener('click', () => {
+        const isOpen = btn.getAttribute('aria-expanded') === 'true';
+        btn.setAttribute('aria-expanded', String(!isOpen));
+        btn.querySelector('.expand-icon').textContent = isOpen ? '▼' : '▲';
+        stats.style.display = isOpen ? 'none' : 'block';
+    });
+
+    return article;
+}
+
+// Function to render all cards
+function renderCards(drivers) {
+    const container = document.getElementById('drivers-container');
+    container.innerHTML = '';
+    drivers.forEach((driver, i) => {
+        container.appendChild(buildNASCARDriverCard(driver, i));
+    });
+}
+
+// Fetch and Search Logic
+let allDrivers = [];
+
+async function init() {
+    try {
+        const response = await fetch('nascar.json');
+        allDrivers = await response.json();
+        renderCards(allDrivers);
+    } catch (e) {
+        console.error("Failed to load drivers", e);
+    }
+}
+
+// Basic search functionality
+document.getElementById('driver-search').addEventListener('input', (e) => {
+    const term = e.target.value.toLowerCase();
+    const filtered = allDrivers.filter(d => 
+        d.full_name.toLowerCase().includes(term) || 
+        d.team_name.toLowerCase().includes(term) ||
+        d.driver_number.toString() === term
+    );
+    renderCards(filtered);
+});
+
+document.addEventListener('DOMContentLoaded', init);
