@@ -1,70 +1,66 @@
 /**
- * NASCAR DRIVER CARDS & SEARCH
+ * NASCAR DRIVER CARDS & SEARCH (UPDATED)
  */
 
 // 1. GLOBAL STATE
 let allDrivers = [];
 
-// 2. CORE FUNCTIONS
+// 2. INIT
 async function init() {
     const container = document.getElementById('drivers-container');
     const searchInput = document.getElementById('driver-search');
     const searchBtn = document.getElementById('search-btn');
 
     try {
-        // Load the data
         const response = await fetch('nascar.json');
-        if (!response.ok) throw new Error('Network response was not ok');
-        
+        if (!response.ok) throw new Error('Network error');
+
         allDrivers = await response.json();
-        
-        // Initial Render
+
         renderCards(allDrivers);
 
-        // Setup Search Listeners
-        if (searchInput) {
-            searchInput.addEventListener('input', () => {
-                const query = searchInput.value.trim().toLowerCase();
-                filterAndRender(query);
-            });
+        // SEARCH EVENTS
+        function handleSearch() {
+            const query = searchInput.value.trim().toLowerCase();
+            filterAndRender(query);
+        }
 
-            searchInput.addEventListener('keydown', (e) => {
-                if (e.key === 'Enter') {
-                    const query = searchInput.value.trim().toLowerCase();
-                    filterAndRender(query);
-                }
+        if (searchInput) {
+            searchInput.addEventListener('input', handleSearch);
+            searchInput.addEventListener('keydown', e => {
+                if (e.key === 'Enter') handleSearch();
             });
         }
 
         if (searchBtn) {
-            searchBtn.addEventListener('click', () => {
-                const query = searchInput.value.trim().toLowerCase();
-                filterAndRender(query);
-            });
+            searchBtn.addEventListener('click', handleSearch);
         }
 
     } catch (e) {
         console.error("Failed to load drivers:", e);
         if (container) {
-            container.innerHTML = `<p class="error">Error loading driver data. Please try again later.</p>`;
+            container.innerHTML = `<p class="error">Error loading driver data.</p>`;
         }
     }
 }
 
-// 3. FILTER LOGIC
+// 3. FILTER
 function filterAndRender(query) {
     const filtered = allDrivers.filter(d => {
+        const fullName = `${d.first_name} ${d.last_name}`.toLowerCase();
+
         return (
-            d.full_name.toLowerCase().includes(query) ||
+            fullName.includes(query) ||
             d.team_name.toLowerCase().includes(query) ||
             d.driver_number.toString().includes(query) ||
             d.name_acronym.toLowerCase().includes(query)
         );
     });
+
     renderCards(filtered, query);
 }
 
-// 4. RENDERING LOGIC
+// 4. RENDER
 function renderCards(drivers, query = '') {
     const container = document.getElementById('drivers-container');
     if (!container) return;
@@ -73,51 +69,65 @@ function renderCards(drivers, query = '') {
 
     if (drivers.length === 0) {
         container.innerHTML = `
-            <div class="no-results" style="grid-column: 1/-1; text-align: center; padding: 2rem;">
-                <p>No drivers found matching "<strong>${query}</strong>"</p>
+            <div class="no-results" style="grid-column: 1/-1; text-align:center;">
+                <p>No drivers found for "<strong>${query}</strong>"</p>
             </div>`;
         return;
     }
 
     drivers.forEach((driver, index) => {
-        container.appendChild(buildNASCARDriverCard(driver, index));
+        container.appendChild(buildCard(driver, index));
     });
 }
 
-function buildNASCARDriverCard(driver, index) {
+// 5. CARD BUILDER
+function buildCard(driver, index) {
     const cardClass = index % 2 === 0 ? 'driver-card-even' : 'driver-card-odd';
     const anchorId = driver.last_name.toLowerCase();
     const teamColour = driver.team_colour ? `#${driver.team_colour}` : '#ffffff';
-    
-    // Image Proxy to prevent hotlinking blocks
+
+    const fullName = `${driver.first_name} ${driver.last_name}`;
+
     const proxiedImage = `https://images.weserv.nl/?url=${driver.headshot_url.replace('https://', '')}`;
 
     const article = document.createElement('article');
-    article.className = `driver-card ${cardClass}`; // Added generic class for easier CSS
+    article.className = `driver-card ${cardClass}`;
     article.id = anchorId;
 
     article.innerHTML = `
         <div class="driver-image">
             <img src="${proxiedImage}" 
-                 alt="${driver.full_name}" 
-                 class="driver-photo" 
+                 alt="${fullName}" 
+                 class="driver-photo"
                  onerror="this.src='images/logo.png'">
         </div>
+
         <div class="driver-info" style="border-left: 5px solid ${teamColour};">
             <h2 class="driver-name">
-                <a href="#${anchorId}">
-                    ${driver.first_name} <span style="text-transform: uppercase; font-weight: 900;">${driver.last_name}</span>
-                </a>
+                ${driver.first_name} 
+                <span style="text-transform: uppercase; font-weight:900;">
+                    ${driver.last_name}
+                </span>
             </h2>
+
             <div class="driver-description">
-                <p class="description-text">${driver.team_name}</p>
-                <p class="description-text">No. ${driver.driver_number} — ${driver.name_acronym}</p>
+                <p>${driver.team_name}</p>
+                <p>No. ${driver.driver_number} — ${driver.name_acronym}</p>
             </div>
-            <ul class="driver-stats" style="display: none;">
-                <li>Series: NASCAR Cup</li>
-                <li>Country: ${driver.country_code}</li>
+
+            <ul class="driver-stats" style="display:none;">
+                <li><strong>Series:</strong> NASCAR Cup</li>
+                <li><strong>Championships:</strong> ${driver.championships}</li>
+                <li><strong>Seasons:</strong> ${driver.seasons}</li>
+                <li><strong>Past Teams:</strong> ${
+                    driver.past_teams.length 
+                        ? driver.past_teams.join(', ') 
+                        : 'None'
+                }</li>
+                <li><strong>About:</strong> ${driver.description}</li>
             </ul>
         </div>
+
         <div class="dropdown">
             <button class="expand-button" aria-expanded="false">
                 <span class="expand-icon">▼</span>
@@ -125,23 +135,25 @@ function buildNASCARDriverCard(driver, index) {
         </div>
     `;
 
-    // Dropdown toggle logic
+    // TOGGLE
     const btn = article.querySelector('.expand-button');
     const stats = article.querySelector('.driver-stats');
-    
+
     btn.addEventListener('click', () => {
-        const isOpen = btn.getAttribute('aria-expanded') === 'true';
-        btn.setAttribute('aria-expanded', String(!isOpen));
-        btn.querySelector('.expand-icon').textContent = isOpen ? '▼' : '▲';
-        stats.style.display = isOpen ? 'none' : 'block';
+        const open = btn.getAttribute('aria-expanded') === 'true';
+        btn.setAttribute('aria-expanded', !open);
+        btn.querySelector('.expand-icon').textContent = open ? '▼' : '▲';
+        stats.style.display = open ? 'none' : 'block';
     });
 
     return article;
 }
 
-// 5. RUN ON LOAD
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
-} else {
-    init();
-}
+// 6. RUN
+document.addEventListener('DOMContentLoaded', init);
+
+// ===============================
+// NO-OPS (leave as-is)
+// ===============================
+function plusSlides() {}
+function currentSlide() {}

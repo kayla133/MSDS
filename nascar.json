@@ -1,138 +1,19 @@
 [
   {
-    "driver_number": 1,
-    "first_name": "Ross",
-    "last_name": "Chastain",
-    "team_name": "Trackhouse Racing",
-    "team_colour": "D1D3D4",
-    "name_acronym": "CHA",
-    "headshot_url": "https://static.nascar.com/wp-content/uploads/sites/7/2024/01/Ross-Chastain-Headshot.png"
-  },
-  {
-    "driver_number": 2,
-    "first_name": "Austin",
-    "last_name": "Cindric",
-    "team_name": "Team Penske",
-    "team_colour": "FFEE00",
-    "name_acronym": "CIN",
-    "headshot_url": "https://static.nascar.com/wp-content/uploads/sites/7/2024/01/Austin-Cindric-Headshot.png"
-  },
-  {
-    "driver_number": 3,
-    "first_name": "Austin",
-    "last_name": "Dillon",
-    "team_name": "Richard Childress Racing",
-    "team_colour": "EF3124",
-    "name_acronym": "DIL",
-    "headshot_url": "https://static.nascar.com/wp-content/uploads/sites/7/2024/01/Austin-Dillon-Headshot.png"
-  },
-  {
-    "driver_number": 4,
-    "first_name": "Noah",
-    "last_name": "Gragson",
-    "team_name": "Front Row Motorsports",
-    "team_colour": "F3DB00",
-    "name_acronym": "GRA",
-    "headshot_url": "https://static.nascar.com/wp-content/uploads/sites/7/2024/01/Noah-Gragson-Headshot.png"
-  },
-  {
-    "driver_number": 5,
-    "first_name": "Kyle",
-    "last_name": "Larson",
-    "team_name": "Hendrick Motorsports",
-    "team_colour": "00529B",
-    "name_acronym": "LAR",
-    "headshot_url": "https://static.nascar.com/wp-content/uploads/sites/7/2024/01/Kyle-Larson-Headshot.png"
-  },
-  {
-    "driver_number": 6,
-    "first_name": "Brad",
-    "last_name": "Keselowski",
-    "team_name": "RFK Racing",
-    "team_colour": "FFFFFF",
-    "name_acronym": "KES",
-    "headshot_url": "https://static.nascar.com/wp-content/uploads/sites/7/2024/01/Brad-Keselowski-Headshot.png"
-  },
-  {
-    "driver_number": 7,
-    "first_name": "Daniel",
-    "last_name": "Suárez",
-    "team_name": "Spire Motorsports",
-    "team_colour": "FF5D00",
-    "name_acronym": "SUA",
-    "headshot_url": "https://static.nascar.com/wp-content/uploads/sites/7/2024/01/Daniel-Suarez-Headshot.png"
-  },
-  {
-    "driver_number": 8,
-    "first_name": "Kyle",
-    "last_name": "Busch",
-    "team_name": "Richard Childress Racing",
-    "team_colour": "EF3124",
-    "name_acronym": "BUS",
-    "headshot_url": "https://static.nascar.com/wp-content/uploads/sites/7/2024/01/Kyle-Busch-Headshot.png"
-  },
-  {
-    "driver_number": 9,
-    "first_name": "Chase",
-    "last_name": "Elliott",
-    "team_name": "Hendrick Motorsports",
-    "team_colour": "F3DB00",
-    "name_acronym": "ELL",
-    "headshot_url": "https://static.nascar.com/wp-content/uploads/sites/7/2024/01/Chase-Elliott-Headshot.png"
-  },
-  {
-    "driver_number": 10,
-    "first_name": "Ty",
-    "last_name": "Dillon",
-    "team_name": "Kaulig Racing",
-    "team_colour": "000000",
-    "name_acronym": "DIL",
-    "headshot_url": "https://static.nascar.com/wp-content/uploads/sites/7/2024/01/Ty-Dillon-Headshot.png"
-  },
-  {
-    "driver_number": 11,
-    "first_name": "Denny",
-    "last_name": "Hamlin",
-    "team_name": "Joe Gibbs Racing",
-    "team_colour": "EF3124",
-    "name_acronym": "HAM",
-    "headshot_url": "https://static.nascar.com/wp-content/uploads/sites/7/2024/01/Denny-Hamlin-Headshot.png"
-  },
-  {
-    "driver_number": 12,
-    "first_name": "Ryan",
-    "last_name": "Blaney",
-    "team_name": "Team Penske",
-    "team_colour": "FFEE00",
-    "name_acronym": "BLA",
-    "headshot_url": "https://static.nascar.com/wp-content/uploads/sites/7/2024/01/Ryan-Blaney-Headshot.png"
-  },
-  {
     "driver_number": 16,
     "first_name": "A.J.",
     "last_name": "Allmendinger",
     "team_name": "Kaulig Racing",
     "team_colour": "000000",
     "name_acronym": "ALL",
-    "headshot_url": "https://static.nascar.com/wp-content/uploads/sites/7/2024/01/AJ-Allmendinger-Headshot.png"
-  },
-  {
-    "driver_number": 17,
-    "first_name": "Chris",
-    "last_name": "Buescher",
-    "team_name": "RFK Racing",
-    "team_colour": "FFFFFF",
-    "name_acronym": "BUE",
-    "headshot_url": "https://static.nascar.com/wp-content/uploads/sites/7/2024/01/Chris-Buescher-Headshot.png"
-  },
-  {
-    "driver_number": 19,
-    "first_name": "Chase",
-    "last_name": "Briscoe",
-    "team_name": "Joe Gibbs Racing",
-    "team_colour": "EF3124",
-    "name_acronym": "BRI",
-    "headshot_url": "https://static.nascar.com/wp-content/uploads/sites/7/2024/01/Chase-Briscoe-Headshot.png"
+    "headshot_url": "https://www.nascar.com/wp-content/uploads/sites/7/2026/01/26/AJ-Allmendinger_resized-1.png",
+    "championships": 0,
+    "seasons": 13,
+    "past_teams": [
+      "Red Bull Racing",
+      "JTG Daugherty Racing"
+    ],
+    "description": "Road course specialist with wins across multiple NASCAR series."
   },
   {
     "driver_number": 20,
@@ -141,7 +22,13 @@
     "team_name": "Joe Gibbs Racing",
     "team_colour": "EF3124",
     "name_acronym": "BEL",
-    "headshot_url": "https://static.nascar.com/wp-content/uploads/sites/7/2024/01/Christopher-Bell-Headshot.png"
+    "headshot_url": "https://www.nascar.com/wp-content/uploads/sites/7/2026/01/26/Christopher-Bell-Helmet_resized.png",
+    "championships": 0,
+    "seasons": 6,
+    "past_teams": [
+      "Leavine Family Racing"
+    ],
+    "description": "Top-tier talent known for versatility and race wins."
   },
   {
     "driver_number": 21,
@@ -150,106 +37,28 @@
     "team_name": "Wood Brothers Racing",
     "team_colour": "EF3124",
     "name_acronym": "BER",
-    "headshot_url": "https://static.nascar.com/wp-content/uploads/sites/7/2024/01/Josh-Berry-Headshot.png"
+    "headshot_url": "https://www.nascar.com/wp-content/uploads/sites/7/2026/01/26/Josh-Berry-Helmet_resized.png",
+    "championships": 0,
+    "seasons": 2,
+    "past_teams": [
+      "Stewart-Haas Racing"
+    ],
+    "description": "Short-track standout who rose through Xfinity success."
   },
   {
-    "driver_number": 22,
-    "first_name": "Joey",
-    "last_name": "Logano",
+    "driver_number": 12,
+    "first_name": "Ryan",
+    "last_name": "Blaney",
     "team_name": "Team Penske",
     "team_colour": "FFEE00",
-    "name_acronym": "LOG",
-    "headshot_url": "https://static.nascar.com/wp-content/uploads/sites/7/2024/01/Joey-Logano-Headshot.png"
-  },
-  {
-    "driver_number": 23,
-    "first_name": "Bubba",
-    "last_name": "Wallace",
-    "team_name": "23XI Racing",
-    "team_colour": "FF0000",
-    "name_acronym": "WAL",
-    "headshot_url": "https://static.nascar.com/wp-content/uploads/sites/7/2024/01/Bubba-Wallace-Headshot.png"
-  },
-  {
-    "driver_number": 24,
-    "first_name": "William",
-    "last_name": "Byron",
-    "team_name": "Hendrick Motorsports",
-    "team_colour": "231F20",
-    "name_acronym": "BYR",
-    "headshot_url": "https://static.nascar.com/wp-content/uploads/sites/7/2024/01/William-Byron-Headshot.png"
-  },
-  {
-    "driver_number": 34,
-    "first_name": "Todd",
-    "last_name": "Gilliland",
-    "team_name": "Front Row Motorsports",
-    "team_colour": "000000",
-    "name_acronym": "GIL",
-    "headshot_url": "https://static.nascar.com/wp-content/uploads/sites/7/2024/01/Todd-Gilliland-Headshot.png"
-  },
-  {
-    "driver_number": 35,
-    "first_name": "Riley",
-    "last_name": "Herbst",
-    "team_name": "23XI Racing",
-    "team_colour": "FF0000",
-    "name_acronym": "HER",
-    "headshot_url": "https://static.nascar.com/wp-content/uploads/sites/7/2024/01/Riley-Herbst-Headshot.png"
-  },
-  {
-    "driver_number": 38,
-    "first_name": "Zane",
-    "last_name": "Smith",
-    "team_name": "Front Row Motorsports",
-    "team_colour": "000000",
-    "name_acronym": "SMI",
-    "headshot_url": "https://static.nascar.com/wp-content/uploads/sites/7/2024/01/Zane-Smith-Headshot.png"
-  },
-  {
-    "driver_number": 41,
-    "first_name": "Cole",
-    "last_name": "Custer",
-    "team_name": "Haas Factory Team",
-    "team_colour": "FF0000",
-    "name_acronym": "CUS",
-    "headshot_url": "https://static.nascar.com/wp-content/uploads/sites/7/2024/01/Cole-Custer-Headshot.png"
-  },
-  {
-    "driver_number": 42,
-    "first_name": "John Hunter",
-    "last_name": "Nemechek",
-    "team_name": "Legacy Motor Club",
-    "team_colour": "D1D3D4",
-    "name_acronym": "NEM",
-    "headshot_url": "https://static.nascar.com/wp-content/uploads/sites/7/2024/01/John-Hunter-Nemechek-Headshot.png"
-  },
-  {
-    "driver_number": 43,
-    "first_name": "Erik",
-    "last_name": "Jones",
-    "team_name": "Legacy Motor Club",
-    "team_colour": "D1D3D4",
-    "name_acronym": "JON",
-    "headshot_url": "https://static.nascar.com/wp-content/uploads/sites/7/2024/01/Erik-Jones-Headshot.png"
-  },
-  {
-    "driver_number": 45,
-    "first_name": "Tyler",
-    "last_name": "Reddick",
-    "team_name": "23XI Racing",
-    "team_colour": "FF0000",
-    "name_acronym": "RED",
-    "headshot_url": "https://static.nascar.com/wp-content/uploads/sites/7/2024/01/Tyler-Reddick-Headshot.png"
-  },
-  {
-    "driver_number": 47,
-    "first_name": "Ricky",
-    "last_name": "Stenhouse Jr.",
-    "team_name": "HYAK Motorsports",
-    "team_colour": "00529B",
-    "name_acronym": "STE",
-    "headshot_url": "https://static.nascar.com/wp-content/uploads/sites/7/2024/01/Ricky-Stenhouse-Jr-Headshot.png"
+    "name_acronym": "BLA",
+    "headshot_url": "https://www.nascar.com/wp-content/uploads/sites/7/2026/01/26/Ryan-Blaney-Helmet_resized.png",
+    "championships": 1,
+    "seasons": 10,
+    "past_teams": [
+      "Wood Brothers Racing"
+    ],
+    "description": "2023 Cup Series champion known for consistency."
   },
   {
     "driver_number": 48,
@@ -258,16 +67,164 @@
     "team_name": "Hendrick Motorsports",
     "team_colour": "A7A9AC",
     "name_acronym": "BOW",
-    "headshot_url": "https://static.nascar.com/wp-content/uploads/sites/7/2024/01/Alex-Bowman-Headshot.png"
+    "headshot_url": "https://www.nascar.com/wp-content/uploads/sites/7/2026/01/26/Alex-Bowman-Helmet_resized.png",
+    "championships": 0,
+    "seasons": 9,
+    "past_teams": [
+      "BK Racing",
+      "Tommy Baldwin Racing"
+    ],
+    "description": "Consistent race winner known for clutch performances."
   },
   {
-    "driver_number": 51,
-    "first_name": "Cody",
-    "last_name": "Ware",
-    "team_name": "Rick Ware Racing",
+    "driver_number": 19,
+    "first_name": "Chase",
+    "last_name": "Briscoe",
+    "team_name": "Joe Gibbs Racing",
+    "team_colour": "EF3124",
+    "name_acronym": "BRI",
+    "headshot_url": "https://www.nascar.com/wp-content/uploads/sites/7/2026/01/26/Chase-Briscoe-Helmet_resized.png",
+    "championships": 0,
+    "seasons": 5,
+    "past_teams": [
+      "Stewart-Haas Racing"
+    ],
+    "description": "Dirt racing standout and Cup Series winner."
+  },
+  {
+    "driver_number": 17,
+    "first_name": "Chris",
+    "last_name": "Buescher",
+    "team_name": "RFK Racing",
+    "team_colour": "FFFFFF",
+    "name_acronym": "BUE",
+    "headshot_url": "https://www.nascar.com/wp-content/uploads/sites/7/2026/01/26/Chris-Buescher-Helmet_resized.png",
+    "championships": 0,
+    "seasons": 9,
+    "past_teams": [
+      "JTG Daugherty Racing"
+    ],
+    "description": "Consistent race winner and playoff contender."
+  },
+  {
+    "driver_number": 8,
+    "first_name": "Kyle",
+    "last_name": "Busch",
+    "team_name": "Richard Childress Racing",
+    "team_colour": "EF3124",
+    "name_acronym": "BUS",
+    "headshot_url": "https://www.nascar.com/wp-content/uploads/sites/7/2026/01/26/Kyle-Busch-Helmet_resized.png",
+    "championships": 2,
+    "seasons": 19,
+    "past_teams": [
+      "Hendrick Motorsports",
+      "Joe Gibbs Racing"
+    ],
+    "description": "Two-time Cup champion with 200+ national series wins."
+  },
+  {
+    "driver_number": 24,
+    "first_name": "William",
+    "last_name": "Byron",
+    "team_name": "Hendrick Motorsports",
+    "team_colour": "231F20",
+    "name_acronym": "BYR",
+    "headshot_url": "https://www.nascar.com/wp-content/uploads/sites/7/2026/01/26/William-Byron-Helmet_resized.png",
+    "championships": 0,
+    "seasons": 7,
+    "past_teams": [],
+    "description": "Consistent multi-race winner and championship contender."
+  },
+  {
+    "driver_number": 1,
+    "first_name": "Ross",
+    "last_name": "Chastain",
+    "team_name": "Trackhouse Racing",
+    "team_colour": "D1D3D4",
+    "name_acronym": "CHA",
+    "headshot_url": "https://www.nascar.com/wp-content/uploads/sites/7/2026/01/26/Ross-Chastain-Helmet_resized.png",
+    "championships": 0,
+    "seasons": 7,
+    "past_teams": [
+      "Premium Motorsports",
+      "Chip Ganassi Racing"
+    ],
+    "description": "Aggressive driver known for bold moves and race-winning speed."
+  },
+  {
+    "driver_number": 2,
+    "first_name": "Austin",
+    "last_name": "Cindric",
+    "team_name": "Team Penske",
+    "team_colour": "FFEE00",
+    "name_acronym": "CIN",
+    "headshot_url": "https://www.nascar.com/wp-content/uploads/sites/7/2026/01/26/Austin-Cindric-Helmet_resized.png",
+    "championships": 0,
+    "seasons": 4,
+    "past_teams": [
+      "Team Penske (Xfinity)"
+    ],
+    "description": "Daytona 500 winner with strong road course ability."
+  },
+  {
+    "driver_number": 41,
+    "first_name": "Cole",
+    "last_name": "Custer",
+    "team_name": "Haas Factory Team",
+    "team_colour": "FF0000",
+    "name_acronym": "CUS",
+    "headshot_url": "https://www.nascar.com/wp-content/uploads/sites/7/2026/01/26/Cole-Custer-Helmet_resized.png",
+    "championships": 0,
+    "seasons": 5,
+    "past_teams": [
+      "Stewart-Haas Racing"
+    ],
+    "description": "Former Cup winner and Xfinity Series champion."
+  },
+  {
+    "driver_number": 10,
+    "first_name": "Ty",
+    "last_name": "Dillon",
+    "team_name": "Kaulig Racing",
     "team_colour": "000000",
-    "name_acronym": "WAR",
-    "headshot_url": "https://static.nascar.com/wp-content/uploads/sites/7/2024/01/Cody-Ware-Headshot.png"
+    "name_acronym": "DIL",
+    "headshot_url": "https://www.nascar.com/wp-content/uploads/sites/7/2026/01/26/Ty-Dillon-Helmet_resized.png",
+    "championships": 0,
+    "seasons": 7,
+    "past_teams": [
+      "Richard Childress Racing",
+      "Germain Racing",
+      "Petty GMS"
+    ],
+    "description": "Steady driver known for superspeedway racing."
+  },
+  {
+    "driver_number": 3,
+    "first_name": "Austin",
+    "last_name": "Dillon",
+    "team_name": "Richard Childress Racing",
+    "team_colour": "EF3124",
+    "name_acronym": "DIL",
+    "headshot_url": "https://www.nascar.com/wp-content/uploads/sites/7/2026/01/26/Austin-Dillon-Helmet_resized.png",
+    "championships": 0,
+    "seasons": 11,
+    "past_teams": [
+      "Richard Childress Racing"
+    ],
+    "description": "Daytona 500 champion driving the iconic No. 3."
+  },
+  {
+    "driver_number": 9,
+    "first_name": "Chase",
+    "last_name": "Elliott",
+    "team_name": "Hendrick Motorsports",
+    "team_colour": "F3DB00",
+    "name_acronym": "ELL",
+    "headshot_url": "https://www.nascar.com/wp-content/uploads/sites/7/2026/01/26/Chase-Elliott-Helmet_resized.png",
+    "championships": 1,
+    "seasons": 9,
+    "past_teams": [],
+    "description": "2020 Cup champion and fan-favorite driver."
   },
   {
     "driver_number": 54,
@@ -276,25 +233,66 @@
     "team_name": "Joe Gibbs Racing",
     "team_colour": "EF3124",
     "name_acronym": "GIB",
-    "headshot_url": "https://static.nascar.com/wp-content/uploads/sites/7/2024/01/Ty-Gibbs-Headshot.png"
+    "headshot_url": "https://www.nascar.com/wp-content/uploads/sites/7/2026/01/26/Ty-Gibbs-Helmet_resized.png",
+    "championships": 0,
+    "seasons": 3,
+    "past_teams": [],
+    "description": "Young rising star and Xfinity Series champion."
   },
   {
-    "driver_number": 60,
-    "first_name": "Ryan",
-    "last_name": "Preece",
-    "team_name": "RFK Racing",
-    "team_colour": "FFFFFF",
-    "name_acronym": "PRE",
-    "headshot_url": "https://static.nascar.com/wp-content/uploads/sites/7/2024/01/Ryan-Preece-Headshot.png"
+    "driver_number": 34,
+    "first_name": "Todd",
+    "last_name": "Gilliland",
+    "team_name": "Front Row Motorsports",
+    "team_colour": "000000",
+    "name_acronym": "GIL",
+    "headshot_url": "https://www.nascar.com/wp-content/uploads/sites/7/2025/01/30/Todd-Gilliand-Helmet_resized.png",
+    "championships": 0,
+    "seasons": 3,
+    "past_teams": [],
+    "description": "Developing young driver in the Cup Series."
   },
   {
-    "driver_number": 71,
-    "first_name": "Michael",
-    "last_name": "McDowell",
-    "team_name": "Spire Motorsports",
-    "team_colour": "00529B",
-    "name_acronym": "MCD",
-    "headshot_url": "https://static.nascar.com/wp-content/uploads/sites/7/2024/01/Michael-McDowell-Headshot.png"
+    "driver_number": 4,
+    "first_name": "Noah",
+    "last_name": "Gragson",
+    "team_name": "Front Row Motorsports",
+    "team_colour": "F3DB00",
+    "name_acronym": "GRA",
+    "headshot_url": "https://www.nascar.com/wp-content/uploads/sites/7/2026/01/26/Noah-Gragson-Helmet_resized.png",
+    "championships": 0,
+    "seasons": 3,
+    "past_teams": [
+      "Legacy Motor Club",
+      "Kaulig Racing"
+    ],
+    "description": "Energetic competitor with Xfinity success."
+  },
+  {
+    "driver_number": 11,
+    "first_name": "Denny",
+    "last_name": "Hamlin",
+    "team_name": "Joe Gibbs Racing",
+    "team_colour": "EF3124",
+    "name_acronym": "HAM",
+    "headshot_url": "https://www.nascar.com/wp-content/uploads/sites/7/2026/01/26/Denny-Hamlin-Helmet_resized.png",
+    "championships": 0,
+    "seasons": 18,
+    "past_teams": [],
+    "description": "Veteran star and multiple Daytona 500 winner."
+  },
+  {
+    "driver_number": 35,
+    "first_name": "Riley",
+    "last_name": "Herbst",
+    "team_name": "23XI Racing",
+    "team_colour": "FF0000",
+    "name_acronym": "HER",
+    "headshot_url": "https://www.nascar.com/wp-content/uploads/sites/7/2026/01/26/Riley-Herbst-Helmet_resized.png",
+    "championships": 0,
+    "seasons": 1,
+    "past_teams": [],
+    "description": "Up-and-coming driver with strong Xfinity background."
   },
   {
     "driver_number": 77,
@@ -303,16 +301,194 @@
     "team_name": "Spire Motorsports",
     "team_colour": "00529B",
     "name_acronym": "HOC",
-    "headshot_url": "https://static.nascar.com/wp-content/uploads/sites/7/2024/01/Carson-Hocevar-Headshot.png"
+    "headshot_url": "https://www.nascar.com/wp-content/uploads/sites/7/2026/02/06/Carson-Hocevar-Helmet-1.png",
+    "championships": 0,
+    "seasons": 2,
+    "past_teams": [],
+    "description": "Young talent rising through NASCAR ranks."
   },
   {
-    "driver_number": 88,
-    "first_name": "Connor",
-    "last_name": "Zilisch",
-    "team_name": "Trackhouse Racing",
+    "driver_number": 84,
+    "first_name": "Jimmie",
+    "last_name": "Johnson",
+    "team_name": "Legacy Motor Club",
     "team_colour": "D1D3D4",
-    "name_acronym": "ZIL",
-    "headshot_url": "https://static.nascar.com/wp-content/uploads/sites/7/2024/01/Connor-Zilisch-Headshot.png"
+    "name_acronym": "JOH",
+    "headshot_url": "https://www.nascar.com/wp-content/uploads/sites/7/2024/01/23/jimmie-johnson-hero-24.png",
+    "championships": 7,
+    "seasons": 21,
+    "past_teams": [
+      "Hendrick Motorsports"
+    ],
+    "description": "Seven-time Cup Series champion and NASCAR legend."
+  },
+  {
+    "driver_number": 43,
+    "first_name": "Erik",
+    "last_name": "Jones",
+    "team_name": "Legacy Motor Club",
+    "team_colour": "D1D3D4",
+    "name_acronym": "JON",
+    "headshot_url": "https://www.nascar.com/wp-content/uploads/sites/7/2026/01/26/Erik-Jones-Helmet_resized.png",
+    "championships": 0,
+    "seasons": 8,
+    "past_teams": [
+      "Joe Gibbs Racing"
+    ],
+    "description": "Cup race winner and former Xfinity champion."
+  },
+  {
+    "driver_number": 6,
+    "first_name": "Brad",
+    "last_name": "Keselowski",
+    "team_name": "RFK Racing",
+    "team_colour": "FFFFFF",
+    "name_acronym": "KES",
+    "headshot_url": "https://www.nascar.com/wp-content/uploads/sites/7/2025/01/30/Brad-Keselowski-Helmet_resized.png",
+    "championships": 1,
+    "seasons": 15,
+    "past_teams": [
+      "Team Penske"
+    ],
+    "description": "2012 Cup champion and RFK co-owner."
+  },
+  {
+    "driver_number": 5,
+    "first_name": "Kyle",
+    "last_name": "Larson",
+    "team_name": "Hendrick Motorsports",
+    "team_colour": "00529B",
+    "name_acronym": "LAR",
+    "headshot_url": "https://www.nascar.com/wp-content/uploads/sites/7/2026/01/26/Kyle-Larson-Helmet_resized.png",
+    "championships": 2,
+    "seasons": 12,
+    "past_teams": [
+      "Chip Ganassi Racing"
+    ],
+    "description": "Elite driver and multiple Cup champion."
+  },
+  {
+    "driver_number": 22,
+    "first_name": "Joey",
+    "last_name": "Logano",
+    "team_name": "Team Penske",
+    "team_colour": "FFEE00",
+    "name_acronym": "LOG",
+    "headshot_url": "https://www.nascar.com/wp-content/uploads/sites/7/2026/01/26/Joey-Logano-Helmet_resized.png",
+    "championships": 2,
+    "seasons": 17,
+    "past_teams": [
+      "Joe Gibbs Racing"
+    ],
+    "description": "Two-time champion known for aggressive racing."
+  },
+  {
+    "driver_number": 71,
+    "first_name": "Michael",
+    "last_name": "McDowell",
+    "team_name": "Spire Motorsports",
+    "team_colour": "00529B",
+    "name_acronym": "MCD",
+    "headshot_url": "https://www.nascar.com/wp-content/uploads/sites/7/2026/01/26/Michael-McDowell-Helmet_resized.png",
+    "championships": 0,
+    "seasons": 16,
+    "past_teams": [
+      "Front Row Motorsports",
+      "Leavine Family Racing"
+    ],
+    "description": "Daytona 500 winner and veteran driver."
+  },
+  {
+    "driver_number": 42,
+    "first_name": "John Hunter",
+    "last_name": "Nemechek",
+    "team_name": "Legacy Motor Club",
+    "team_colour": "D1D3D4",
+    "name_acronym": "NEM",
+    "headshot_url": "https://www.nascar.com/wp-content/uploads/sites/7/2026/01/26/JHN-Helmet_resized.png",
+    "championships": 0,
+    "seasons": 4,
+    "past_teams": [
+      "Front Row Motorsports"
+    ],
+    "description": "Versatile racer with wins across multiple series."
+  },
+  {
+    "driver_number": 60,
+    "first_name": "Ryan",
+    "last_name": "Preece",
+    "team_name": "RFK Racing",
+    "team_colour": "FFFFFF",
+    "name_acronym": "PRE",
+    "headshot_url": "https://www.nascar.com/wp-content/uploads/sites/7/2025/01/28/Ryan-Preece-Helmet.png",
+    "championships": 0,
+    "seasons": 6,
+    "past_teams": [
+      "JTG Daugherty Racing",
+      "Stewart-Haas Racing"
+    ],
+    "description": "Short-track specialist and steady competitor."
+  },
+  {
+    "driver_number": 45,
+    "first_name": "Tyler",
+    "last_name": "Reddick",
+    "team_name": "23XI Racing",
+    "team_colour": "FF0000",
+    "name_acronym": "RED",
+    "headshot_url": "https://www.nascar.com/wp-content/uploads/sites/7/2026/02/06/Tyler-Reddick-Helmet-1.png",
+    "championships": 0,
+    "seasons": 6,
+    "past_teams": [
+      "Richard Childress Racing"
+    ],
+    "description": "Dynamic driver known for road course success."
+  },
+  {
+    "driver_number": 38,
+    "first_name": "Zane",
+    "last_name": "Smith",
+    "team_name": "Front Row Motorsports",
+    "team_colour": "000000",
+    "name_acronym": "SMI",
+    "headshot_url": "https://www.nascar.com/wp-content/uploads/sites/7/2026/01/26/Zane-Smith-Helmet_resized.png",
+    "championships": 0,
+    "seasons": 2,
+    "past_teams": [],
+    "description": "Truck Series champion moving into Cup."
+  },
+  {
+    "driver_number": 47,
+    "first_name": "Ricky",
+    "last_name": "Stenhouse Jr.",
+    "team_name": "HYAK Motorsports",
+    "team_colour": "00529B",
+    "name_acronym": "STE",
+    "headshot_url": "https://www.nascar.com/wp-content/uploads/sites/7/2022/11/27/Ricky-Stenhouse-Helmet_resized.png",
+    "championships": 0,
+    "seasons": 12,
+    "past_teams": [
+      "Roush Fenway Racing",
+      "JTG Daugherty Racing"
+    ],
+    "description": "Daytona 500 winner and superspeedway racer."
+  },
+  {
+    "driver_number": 7,
+    "first_name": "Daniel",
+    "last_name": "Suárez",
+    "team_name": "Spire Motorsports",
+    "team_colour": "FF5D00",
+    "name_acronym": "SUA",
+    "headshot_url": "https://www.nascar.com/wp-content/uploads/sites/7/2026/01/26/Daniel-Suarez-Helmet_resized.png",
+    "championships": 0,
+    "seasons": 8,
+    "past_teams": [
+      "Joe Gibbs Racing",
+      "Stewart-Haas Racing",
+      "Trackhouse Racing"
+    ],
+    "description": "First Mexican-born Cup winner."
   },
   {
     "driver_number": 97,
@@ -321,15 +497,51 @@
     "team_name": "Trackhouse Racing",
     "team_colour": "D1D3D4",
     "name_acronym": "SVG",
-    "headshot_url": "https://static.nascar.com/wp-content/uploads/sites/7/2024/01/Shane-van-Gisbergen-Headshot.png"
+    "headshot_url": "https://www.nascar.com/wp-content/uploads/sites/7/2026/01/26/SVG-Helmet_resized.png",
+    "championships": 0,
+    "seasons": 2,
+    "past_teams": [],
+    "description": "International star and Chicago Street Course winner."
   },
   {
-    "driver_number": 99,
-    "first_name": "Corey",
-    "last_name": "LaJoie",
-    "team_name": "RFK Racing",
-    "team_colour": "FFFFFF",
-    "name_acronym": "LAJ",
-    "headshot_url": "https://static.nascar.com/wp-content/uploads/sites/7/2024/01/Corey-LaJoie-Headshot.png"
+    "driver_number": 23,
+    "first_name": "Bubba",
+    "last_name": "Wallace",
+    "team_name": "23XI Racing",
+    "team_colour": "FF0000",
+    "name_acronym": "WAL",
+    "headshot_url": "https://www.nascar.com/wp-content/uploads/sites/7/2026/01/26/Bubba-Wallace-Helmet_resized.png",
+    "championships": 0,
+    "seasons": 7,
+    "past_teams": [
+      "Richard Petty Motorsports"
+    ],
+    "description": "Cup winner and key driver for 23XI Racing."
+  },
+  {
+    "driver_number": 51,
+    "first_name": "Cody",
+    "last_name": "Ware",
+    "team_name": "Rick Ware Racing",
+    "team_colour": "000000",
+    "name_acronym": "WAR",
+    "headshot_url": "https://www.nascar.com/wp-content/uploads/sites/7/2025/01/28/Cody-Ware-Helmet.png",
+    "championships": 0,
+    "seasons": 4,
+    "past_teams": [],
+    "description": "Driver gaining experience with family-owned team."
+  },
+  {
+    "driver_number": 88,
+    "first_name": "Connor",
+    "last_name": "Zilisch",
+    "team_name": "Trackhouse Racing",
+    "team_colour": "D1D3D4",
+    "name_acronym": "ZIL",
+    "headshot_url": "https://www.nascar.com/wp-content/uploads/sites/7/2026/01/26/Connor-Zilisch-helmet_resized.png",
+    "championships": 0,
+    "seasons": 1,
+    "past_teams": [],
+    "description": "Highly regarded young prospect entering Cup competition."
   }
 ]
