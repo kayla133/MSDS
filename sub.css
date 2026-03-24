@@ -96,8 +96,19 @@ input {
 }
 
 .driver-stats {
+    margin-top: 0;
+    padding-top: 0;
+    border-top: 1px solid transparent;
+    list-style: none;
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: max-height 0.55s ease, opacity 0.35s ease, margin-top 0.55s ease, padding-top 0.55s ease;
+}
+
+.driver-stats.is-open {
     margin-top: 10px;
     padding-top: 10px;
-    border-top: 1px solid rgba(255,255,255,0.2);
-    list-style: none;
+    border-top-color: rgba(255,255,255,0.2);
+    opacity: 1;
 }
