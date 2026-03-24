@@ -336,3 +336,32 @@ document.addEventListener('DOMContentLoaded', () => {
 // ===============================
 function plusSlides() {}
 function currentSlide() {}
+// MODAL LOGIC
+const modal = document.getElementById('contact-modal');
+const openBtn = document.getElementById('open-contact');
+const closeBtn = document.querySelector('.close-btn');
+
+// OPEN
+openBtn.addEventListener('click', () => {
+    modal.style.display = 'block';
+});
+
+// CLOSE (X button)
+closeBtn.addEventListener('click', () => {
+    modal.style.display = 'none';
+});
+
+// CLOSE (click outside)
+window.addEventListener('click', (e) => {
+    if (e.target === modal) {
+        modal.style.display = 'none';
+    }
+});
+
+// FORM SUBMIT (basic demo)
+document.getElementById('contact-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    alert("Message sent! (You can connect this to backend later)");
+    modal.style.display = 'none';
+    this.reset();
+});
