@@ -105,7 +105,7 @@ function currentSlide() {}
 
 const navItems = [
     { label: "Formula 1", href: "form.html" },
-    { label: "NASCAR",    href: "form.html" },
+    { label: "NASCAR",    href: "nascar.html" },
     { label: "TBD",       href: "form.html" },
 ];
 
