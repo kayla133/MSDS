@@ -60,25 +60,25 @@
             <span class="dot" onclick="currentSlide(3)"></span>
         </div>
     </section>
-    
+
     <section class="nascar">
 
         <!-- Image One-->
         <div class="mySlides fade">
             <img src="images/nascarimageone.webp" style="width:100%">
-            <div class="text"><a href="#">NASCAR</a></div>
+            <div class="text"><a href="nascar.html">NASCAR</a></div>
         </div>
 
         <!-- Image Two-->
         <div class="mySlides fade">
             <img src="images/nascarimagetwo.jpg" style="width:100%">
-            <div class="text"><a href="#">NASCAR</a></div>
+            <div class="text"><a href="nascar.html">NASCAR</a></div>
         </div>
 
         <!-- Image Three-->
         <div class="mySlides fade">
             <img src="images/nascarimagetwo.webp" style="width:100%">
-            <div class="text"><a href="#">NASCAR</a></div>
+            <div class="text"><a href="nascar.html">NASCAR</a></div>
         </div>
 
         <!-- Next and previous buttons -->
@@ -95,7 +95,28 @@
 
     </section>
     <footer>
-        <a href="contact.html">Contact Us</a>
+        <!-- Contact us Button -->
+        <button id="open-contact" class="contact-button">Contact Us</button>
+
+        <!-- Contact Form Modal -->
+        <div id="contact-modal" class="modal">
+            <div class="modal-content">
+                <span id="close-contact" class="close">&times;</span>
+                <h2>Contact Us</h2>
+                <form id="contact-form">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" required>
+
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+
+                    <label for="message">Message:</label>
+                    <textarea id="message" name="message" rows="4" required></textarea>
+
+                    <button type="submit">Send</button>
+                </form>
+            </div>
+        </div>
     </footer>
     <script src="script.js"></script>
 </body>
