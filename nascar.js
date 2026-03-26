@@ -4,9 +4,46 @@
 
 // 1. GLOBAL STATE
 let allDrivers = [];
+let favoriteDriverNumbers = new Set();
+let currentQuery = '';
+
+function loadFavorites() {
+    const stored = localStorage.getItem('nascarFavorites');
+    if (!stored) return;
+
+    try {
+        const arr = JSON.parse(stored);
+        if (Array.isArray(arr)) {
+            favoriteDriverNumbers = new Set(arr);
+        }
+    } catch (e) {
+        console.warn('Invalid favorites data in localStorage', e);
+    }
+}
+
+function saveFavorites() {
+    localStorage.setItem('nascarFavorites', JSON.stringify([...favoriteDriverNumbers]));
+}
+
+function toggleFavorite(driverNumber) {
+    if (favoriteDriverNumbers.has(driverNumber)) {
+        favoriteDriverNumbers.delete(driverNumber);
+    } else {
+        favoriteDriverNumbers.add(driverNumber);
+    }
+
+    saveFavorites();
+    if (currentQuery) {
+        filterAndRender(currentQuery);
+    } else {
+        renderCards(allDrivers);
+    }
+}
 
 // 2. INIT
 async function init() {
+    loadFavorites();
+
     const container = document.getElementById('drivers-container');
     const searchInput = document.getElementById('driver-search');
     const searchBtn = document.getElementById('search-btn');
@@ -46,6 +83,8 @@ async function init() {
 
 // 3. FILTER
 function filterAndRender(query) {
+    currentQuery = query;
+
     const filtered = allDrivers.filter(d => {
         const fullName = `${d.first_name} ${d.last_name}`.toLowerCase();
 
@@ -75,7 +114,17 @@ function renderCards(drivers, query = '') {
         return;
     }
 
-    drivers.forEach((driver, index) => {
+    const favoriteDrivers = drivers.filter(d => favoriteDriverNumbers.has(d.driver_number));
+    const nonFavoriteDrivers = drivers.filter(d => !favoriteDriverNumbers.has(d.driver_number));
+    const orderedDrivers = [...favoriteDrivers, ...nonFavoriteDrivers];
+
+    if (favoriteDrivers.length > 0) {
+        const favHeader = document.createElement('div');
+        favHeader.className = 'favorites-label';
+        container.appendChild(favHeader);
+    }
+
+    orderedDrivers.forEach((driver, index) => {
         container.appendChild(buildCard(driver, index));
     });
 }
@@ -90,6 +139,8 @@ function buildCard(driver, index) {
 
     const proxiedImage = `https://images.weserv.nl/?url=${driver.headshot_url.replace('https://', '')}`;
 
+    const isFavorite = favoriteDriverNumbers.has(driver.driver_number);
+
     const article = document.createElement('article');
     article.className = `driver-card ${cardClass}`;
     article.id = anchorId;
@@ -103,6 +154,10 @@ function buildCard(driver, index) {
         </div>
 
         <div class="driver-info" style="border-left: 5px solid ${teamColour};">
+            <button class="favorite-btn ${isFavorite ? 'favorited' : ''}" aria-label="Toggle favorite">
+                <i class="${isFavorite ? 'fa-solid' : 'fa-regular'} fa-star"></i>
+            </button>
+
             <h2 class="driver-name">
                 ${driver.first_name} 
                 <span style="text-transform: uppercase; font-weight:900;">
@@ -135,7 +190,11 @@ function buildCard(driver, index) {
         </div>
     `;
 
-    // TOGGLE
+    const favoriteBtn = article.querySelector('.favorite-btn');
+    favoriteBtn.addEventListener('click', () => {
+        toggleFavorite(driver.driver_number);
+    });
+
     const btn = article.querySelector('.expand-button');
     const stats = article.querySelector('.driver-stats');
 
