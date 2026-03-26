@@ -165,6 +165,10 @@ const navItems = [
     { label: "NASCAR",    href: "nascar.html" }
 ];
 
+function normalizeDriverName(name = '') {
+  return name.toLowerCase().replace(/\s+/g, ' ').trim();
+}
+
 
 // ===============================
 // DRIVER CARD RENDERING
@@ -176,10 +180,17 @@ const navItems = [
  * @param {number} index  - Zero-based position (determines even/odd styling)
  * @returns {HTMLElement}
  */
-function buildDriverCard(driver, index) {
+function buildDriverCard(driver, index, detailsByName) {
     const cardClass = index % 2 === 0 ? 'driver-card-even' : 'driver-card-odd';
     const anchorId = driver.full_name.toLowerCase().replace(/\s+/g, '-');
     const teamColour = driver.team_colour ? `#${driver.team_colour}` : '#888';
+  const details = detailsByName.get(normalizeDriverName(driver.full_name)) || {};
+  const wdc = Number.isFinite(details.number_of_wdc) ? details.number_of_wdc : 'N/A';
+  const seasons = Number.isFinite(details.number_of_seasons) ? details.number_of_seasons : 'N/A';
+  const pastTeams = Array.isArray(details.past_teams) && details.past_teams.length > 0
+    ? details.past_teams.join(', ')
+    : 'None listed';
+  const description = details.description || 'No description available.';
 
     const isFavorite = formFavoriteDriverNumbers.has(driver.driver_number);
 
@@ -208,7 +219,10 @@ function buildDriverCard(driver, index) {
                 <p class="description-text">No. ${driver.driver_number} &mdash; ${driver.name_acronym}</p>
             </div>
             <ul class="driver-stats">
-                <li class="stat-item">Stats coming soon</li>
+              <li class="stat-item">Number of World Drivers' Championships: ${wdc}</li>
+              <li class="stat-item">Number of Seasons: ${seasons}</li>
+              <li class="stat-item">Past Teams: ${pastTeams}</li>
+              <li class="stat-item">Description: ${description}</li>
             </ul>
             <div class="dropdown">
                 <button class="expand-button" aria-label="Expand driver details" aria-expanded="false">
@@ -230,13 +244,25 @@ function buildDriverCard(driver, index) {
     // Expand/collapse toggle
     const btn = article.querySelector('.expand-button');
     const stats = article.querySelector('.driver-stats');
-    stats.style.display = 'none';
+    stats.classList.remove('is-open');
+    stats.style.maxHeight = '0px';
+    const expandedMaxHeight = '1500px';
 
     btn.addEventListener('click', () => {
         const isOpen = btn.getAttribute('aria-expanded') === 'true';
-        btn.setAttribute('aria-expanded', String(!isOpen));
-        btn.querySelector('.expand-icon').textContent = isOpen ? '▼' : '▲';
-        stats.style.display = isOpen ? 'none' : 'block';
+        const nextOpen = !isOpen;
+
+        btn.setAttribute('aria-expanded', String(nextOpen));
+        btn.querySelector('.expand-icon').textContent = nextOpen ? '▲' : '▼';
+
+        if (nextOpen) {
+            stats.classList.add('is-open');
+          stats.style.maxHeight = expandedMaxHeight;
+            return;
+        }
+
+        stats.style.maxHeight = '0px';
+        stats.classList.remove('is-open');
     });
 
     return article;
@@ -251,9 +277,26 @@ async function loadDrivers() {
     if (!container) return; // Not on the drivers page
 
     try {
-        const response = await fetch('form.json');
-        if (!response.ok) throw new Error(`Failed to load form.json (${response.status})`);
-        const drivers = await response.json();
+    const [driversResponse, detailsResponse] = await Promise.all([
+      fetch('form.json'),
+      fetch('form-driver-details.json')
+    ]);
+
+    if (!driversResponse.ok) {
+      throw new Error(`Failed to load form.json (${driversResponse.status})`);
+    }
+    if (!detailsResponse.ok) {
+      throw new Error(`Failed to load form-driver-details.json (${detailsResponse.status})`);
+    }
+
+    const [drivers, details] = await Promise.all([
+      driversResponse.json(),
+      detailsResponse.json()
+    ]);
+
+    const detailsByName = new Map(
+      details.map(d => [normalizeDriverName(d.full_name), d])
+    );
 
         // Deduplicate by driver_number (keep first occurrence)
         const seen = new Set();
@@ -269,6 +312,7 @@ async function loadDrivers() {
         // Store for search and render with favorites
         formAllDrivers = unique;
         window._allDrivers = unique;
+    window._driverDetailsByName = detailsByName;
 
         applyFormFilterAndRender();
     } catch (err) {
@@ -283,6 +327,7 @@ async function loadDrivers() {
  * Renders an array of driver objects into the given container.
  */
 function renderDriverCards(drivers, container) {
+  const detailsByName = window._driverDetailsByName || new Map();
     container.innerHTML = '';
 
     const favorites = drivers.filter(d => formFavoriteDriverNumbers.has(d.driver_number));

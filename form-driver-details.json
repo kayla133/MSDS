@@ -1,0 +1,178 @@
+[
+  {
+    "full_name": "Lando NORRIS",
+    "number_of_wdc": 1,
+    "number_of_seasons": 8,
+    "past_teams": ["Toro Rosso"],
+    "description": "British racer who took his first win in 2024 and secured the 2025 World Championship after a late-season comeback.",
+    "source_url": "https://www.formula1.com/en/drivers/lando-norris"
+  },
+  {
+    "full_name": "Max VERSTAPPEN",
+    "number_of_wdc": 4,
+    "number_of_seasons": 12,
+    "past_teams": ["Toro Rosso"],
+    "description": "Dutch driver and youngest-ever F1 starter at 17, later becoming a dominant multi-time champion with Red Bull.",
+    "source_url": "https://www.formula1.com/en/drivers/max-verstappen"
+  },
+  {
+    "full_name": "Gabriel BORTOLETO",
+    "number_of_wdc": 0,
+    "number_of_seasons": 2,
+    "past_teams": ["Kick Sauber"],
+    "description": "Brazilian rookie and back-to-back F3 and F2 champion who became Brazil's first full-time F1 driver in years.",
+    "source_url": "https://www.formula1.com/en/drivers/gabriel-bortoleto"
+  },
+  {
+    "full_name": "Isack HADJAR",
+    "number_of_wdc": 0,
+    "number_of_seasons": 2,
+    "past_teams": ["Racing Bulls"],
+    "description": "French-Algerian Red Bull junior who graduated through the feeder series and reached Formula 1 in 2025.",
+    "source_url": "https://www.formula1.com/en/drivers/isack-hadjar"
+  },
+  {
+    "full_name": "Pierre GASLY",
+    "number_of_wdc": 0,
+    "number_of_seasons": 10,
+    "past_teams": ["Toro Rosso", "Red Bull", "AlphaTauri"],
+    "description": "French driver known for resilience and racecraft, highlighted by his 2020 Italian Grand Prix victory.",
+    "source_url": "https://www.formula1.com/en/drivers/pierre-gasly"
+  },
+  {
+    "full_name": "Sergio PEREZ",
+    "number_of_wdc": 0,
+    "number_of_seasons": 17,
+    "past_teams": ["Sauber", "McLaren", "Force India", "Racing Point", "Red Bull"],
+    "description": "Mexican race winner known for tire management and consistency across a long career.",
+    "source_url": "https://www.formula1.com/en/drivers/sergio-perez"
+  },
+  {
+    "full_name": "Kimi ANTONELLI",
+    "number_of_wdc": 0,
+    "number_of_seasons": 2,
+    "past_teams": [],
+    "description": "Italian young talent who rose rapidly through junior categories and joined Mercedes in Formula 1.",
+    "source_url": "https://www.formula1.com/en/drivers/kimi-antonelli"
+  },
+  {
+    "full_name": "Fernando ALONSO",
+    "number_of_wdc": 2,
+    "number_of_seasons": 18,
+    "past_teams": ["Renault", "McLaren", "Ferrari", "Alpine"],
+    "description": "Two-time world champion from Spain, renowned for longevity, racecraft, and all-around driving skill.",
+    "source_url": "https://www.formula1.com/en/drivers/fernando-alonso"
+  },
+  {
+    "full_name": "Charles LECLERC",
+    "number_of_wdc": 0,
+    "number_of_seasons": 9,
+    "past_teams": ["Sauber"],
+    "description": "Monaco driver with elite one-lap pace and multiple Ferrari wins, established as a leading front-runner.",
+    "source_url": "https://www.formula1.com/en/drivers/charles-leclerc"
+  },
+  {
+    "full_name": "Lance STROLL",
+    "number_of_wdc": 0,
+    "number_of_seasons": 10,
+    "past_teams": ["Williams", "Force India", "Racing Point"],
+    "description": "Canadian driver who reached a podium as a rookie and has remained a long-term Aston Martin driver.",
+    "source_url": "https://www.formula1.com/en/drivers/lance-stroll"
+  },
+  {
+    "full_name": "Alexander ALBON",
+    "number_of_wdc": 0,
+    "number_of_seasons": 8,
+    "past_teams": ["Toro Rosso", "Red Bull"],
+    "description": "Thai-British racer who returned to F1 with Williams and rebuilt his reputation with consistent performances.",
+    "source_url": "https://www.formula1.com/en/drivers/alexander-albon"
+  },
+  {
+    "full_name": "Nico HULKENBERG",
+    "number_of_wdc": 0,
+    "number_of_seasons": 17,
+    "past_teams": ["Williams", "Force India", "Renault", "Racing Point", "Aston Martin", "Haas", "Kick Sauber"],
+    "description": "Experienced German driver known for versatility and longevity, with extensive time across multiple teams.",
+    "source_url": "https://www.formula1.com/en/drivers/nico-hulkenberg"
+  },
+  {
+    "full_name": "Liam LAWSON",
+    "number_of_wdc": 0,
+    "number_of_seasons": 4,
+    "past_teams": ["AlphaTauri", "Red Bull"],
+    "description": "New Zealander who impressed in substitute and full-time opportunities, earning seats within the Red Bull system.",
+    "source_url": "https://www.formula1.com/en/drivers/liam-lawson"
+  },
+  {
+    "full_name": "Esteban OCON",
+    "number_of_wdc": 0,
+    "number_of_seasons": 11,
+    "past_teams": ["Manor", "Force India", "Mercedes (reserve)", "Renault", "Alpine"],
+    "description": "French Grand Prix winner who overcame major financial and career setbacks to become a proven Formula 1 driver.",
+    "source_url": "https://www.formula1.com/en/drivers/esteban-ocon"
+  },
+  {
+    "full_name": "Arvid LINDBLAD",
+    "number_of_wdc": 0,
+    "number_of_seasons": 1,
+    "past_teams": [],
+    "description": "British rookie and Red Bull junior who rose quickly through the junior ladder into Formula 1.",
+    "source_url": "https://www.formula1.com/en/drivers/arvid-lindblad"
+  },
+  {
+    "full_name": "Franco COLAPINTO",
+    "number_of_wdc": 0,
+    "number_of_seasons": 3,
+    "past_teams": ["Williams"],
+    "description": "Argentine driver who returned Argentina to the F1 grid after decades and built momentum through strong junior results.",
+    "source_url": "https://www.formula1.com/en/drivers/franco-colapinto"
+  },
+  {
+    "full_name": "Lewis HAMILTON",
+    "number_of_wdc": 7,
+    "number_of_seasons": 20,
+    "past_teams": ["McLaren", "Mercedes"],
+    "description": "Seven-time world champion and one of F1's most successful drivers, holding records for wins and pole positions.",
+    "source_url": "https://www.formula1.com/en/drivers/lewis-hamilton"
+  },
+  {
+    "full_name": "Carlos SAINZ",
+    "number_of_wdc": 0,
+    "number_of_seasons": 12,
+    "past_teams": ["Toro Rosso", "Renault", "McLaren", "Ferrari"],
+    "description": "Spanish race winner known for technical feedback and consistency across several top Formula 1 teams.",
+    "source_url": "https://www.formula1.com/en/drivers/carlos-sainz"
+  },
+  {
+    "full_name": "George RUSSELL",
+    "number_of_wdc": 0,
+    "number_of_seasons": 7,
+    "past_teams": ["Williams"],
+    "description": "British Mercedes driver with strong qualifying speed and racecraft, securing multiple wins in modern F1.",
+    "source_url": "https://www.formula1.com/en/drivers/george-russell"
+  },
+  {
+    "full_name": "Valtteri BOTTAS",
+    "number_of_wdc": 0,
+    "number_of_seasons": 14,
+    "past_teams": ["Williams", "Mercedes", "Alfa Romeo", "Kick Sauber", "Mercedes (reserve)"],
+    "description": "Finnish multiple race winner recognized for consistency and team contribution through different career phases.",
+    "source_url": "https://www.formula1.com/en/drivers/valtteri-bottas"
+  },
+  {
+    "full_name": "Oscar PIASTRI",
+    "number_of_wdc": 0,
+    "number_of_seasons": 4,
+    "past_teams": ["Alpine (reserve)"],
+    "description": "Australian junior champion turned F1 race winner who quickly established himself among the leading drivers.",
+    "source_url": "https://www.formula1.com/en/drivers/oscar-piastri"
+  },
+  {
+    "full_name": "Oliver BEARMAN",
+    "number_of_wdc": 0,
+    "number_of_seasons": 3,
+    "past_teams": ["Ferrari (reserve)"],
+    "description": "British prospect who impressed on stand-in appearances and progressed into a full-time Formula 1 opportunity.",
+    "source_url": "https://www.formula1.com/en/drivers/oliver-bearman"
+  }
+]
