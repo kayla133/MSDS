@@ -6,63 +6,6 @@ let globalIndex = 1;
 let intervalId = null;
 const INTERVAL_MS = 2000;
 
-// Formula One favorite state
-let formAllDrivers = [];
-let formFavoriteDriverNumbers = new Set();
-let formCurrentQuery = '';
-
-function loadFormFavorites() {
-    const stored = localStorage.getItem('formFavorites');
-    if (!stored) return;
-
-    try {
-        const arr = JSON.parse(stored);
-        if (Array.isArray(arr)) {
-            formFavoriteDriverNumbers = new Set(arr);
-        }
-    } catch (e) {
-        console.warn('Invalid formFavorites data in localStorage', e);
-    }
-}
-
-function saveFormFavorites() {
-    localStorage.setItem('formFavorites', JSON.stringify([...formFavoriteDriverNumbers]));
-}
-
-function toggleFormFavorite(driverNumber) {
-    if (formFavoriteDriverNumbers.has(driverNumber)) {
-        formFavoriteDriverNumbers.delete(driverNumber);
-    } else {
-        formFavoriteDriverNumbers.add(driverNumber);
-    }
-    saveFormFavorites();
-    applyFormFilterAndRender();
-}
-
-function applyFormFilterAndRender() {
-    const container = document.getElementById('drivers-container');
-    if (!container) return;
-
-    const query = formCurrentQuery.trim().toLowerCase();
-    const pool = [...formAllDrivers];
-    const filtered = query
-        ? pool.filter(d =>
-            d.full_name.toLowerCase().includes(query) ||
-            d.team_name.toLowerCase().includes(query) ||
-            d.name_acronym.toLowerCase().includes(query)
-          )
-        : pool;
-
-    if (filtered.length === 0) {
-        container.innerHTML = `<p style="text-align:center; margin-top:2rem;">
-            No drivers found for "<strong>${query}</strong>"
-        </p>`;
-        return;
-    }
-
-    renderDriverCards(filtered, container);
-}
-
 function setGlobalIndex(n) {
   globalIndex = n;
   carousels.forEach(c => c.show(globalIndex));
@@ -165,6 +108,10 @@ const navItems = [
     { label: "NASCAR",    href: "nascar.html" }
 ];
 
+function normalizeDriverName(name = '') {
+  return name.toLowerCase().replace(/\s+/g, ' ').trim();
+}
+
 
 // ===============================
 // DRIVER CARD RENDERING
@@ -176,12 +123,17 @@ const navItems = [
  * @param {number} index  - Zero-based position (determines even/odd styling)
  * @returns {HTMLElement}
  */
-function buildDriverCard(driver, index) {
+function buildDriverCard(driver, index, detailsByName) {
     const cardClass = index % 2 === 0 ? 'driver-card-even' : 'driver-card-odd';
     const anchorId = driver.full_name.toLowerCase().replace(/\s+/g, '-');
     const teamColour = driver.team_colour ? `#${driver.team_colour}` : '#888';
-
-    const isFavorite = formFavoriteDriverNumbers.has(driver.driver_number);
+  const details = detailsByName.get(normalizeDriverName(driver.full_name)) || {};
+  const wdc = Number.isFinite(details.number_of_wdc) ? details.number_of_wdc : 'N/A';
+  const seasons = Number.isFinite(details.number_of_seasons) ? details.number_of_seasons : 'N/A';
+  const pastTeams = Array.isArray(details.past_teams) && details.past_teams.length > 0
+    ? details.past_teams.join(', ')
+    : 'None listed';
+  const description = details.description || 'No description available.';
 
     const article = document.createElement('article');
     article.className = cardClass;
@@ -195,9 +147,6 @@ function buildDriverCard(driver, index) {
                  onerror="this.src='images/logo.png'">
         </div>
         <div class="driver-info">
-            <button class="favorite-btn ${isFavorite ? 'favorited' : ''}" aria-label="Toggle favorite">
-                <i class="${isFavorite ? 'fa-solid' : 'fa-regular'} fa-star"></i>
-            </button>
             <h2 class="driver-name">
                 <a href="#${anchorId}">${driver.full_name}</a>
             </h2>
@@ -208,7 +157,10 @@ function buildDriverCard(driver, index) {
                 <p class="description-text">No. ${driver.driver_number} &mdash; ${driver.name_acronym}</p>
             </div>
             <ul class="driver-stats">
-                <li class="stat-item">Stats coming soon</li>
+              <li class="stat-item">Number of World Drivers' Championships: ${wdc}</li>
+              <li class="stat-item">Number of Seasons: ${seasons}</li>
+              <li class="stat-item">Past Teams: ${pastTeams}</li>
+              <li class="stat-item">Description: ${description}</li>
             </ul>
             <div class="dropdown">
                 <button class="expand-button" aria-label="Expand driver details" aria-expanded="false">
@@ -218,25 +170,28 @@ function buildDriverCard(driver, index) {
         </div>
     `;
 
-    // Favorite toggle
-    const favoriteBtn = article.querySelector('.favorite-btn');
-    if (favoriteBtn) {
-        favoriteBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            toggleFormFavorite(driver.driver_number);
-        });
-    }
-
-    // Expand/collapse toggle
+    // Expand/collapse toggle with smooth slide animation
     const btn = article.querySelector('.expand-button');
     const stats = article.querySelector('.driver-stats');
-    stats.style.display = 'none';
+    stats.classList.remove('is-open');
+    stats.style.maxHeight = '0px';
+    const expandedMaxHeight = '1500px';
 
     btn.addEventListener('click', () => {
         const isOpen = btn.getAttribute('aria-expanded') === 'true';
-        btn.setAttribute('aria-expanded', String(!isOpen));
-        btn.querySelector('.expand-icon').textContent = isOpen ? '▼' : '▲';
-        stats.style.display = isOpen ? 'none' : 'block';
+        const nextOpen = !isOpen;
+
+        btn.setAttribute('aria-expanded', String(nextOpen));
+        btn.querySelector('.expand-icon').textContent = nextOpen ? '▲' : '▼';
+
+        if (nextOpen) {
+            stats.classList.add('is-open');
+          stats.style.maxHeight = expandedMaxHeight;
+            return;
+        }
+
+        stats.style.maxHeight = '0px';
+        stats.classList.remove('is-open');
     });
 
     return article;
@@ -251,9 +206,26 @@ async function loadDrivers() {
     if (!container) return; // Not on the drivers page
 
     try {
-        const response = await fetch('form.json');
-        if (!response.ok) throw new Error(`Failed to load form.json (${response.status})`);
-        const drivers = await response.json();
+    const [driversResponse, detailsResponse] = await Promise.all([
+      fetch('form.json'),
+      fetch('form-driver-details.json')
+    ]);
+
+    if (!driversResponse.ok) {
+      throw new Error(`Failed to load form.json (${driversResponse.status})`);
+    }
+    if (!detailsResponse.ok) {
+      throw new Error(`Failed to load form-driver-details.json (${detailsResponse.status})`);
+    }
+
+    const [drivers, details] = await Promise.all([
+      driversResponse.json(),
+      detailsResponse.json()
+    ]);
+
+    const detailsByName = new Map(
+      details.map(d => [normalizeDriverName(d.full_name), d])
+    );
 
         // Deduplicate by driver_number (keep first occurrence)
         const seen = new Set();
@@ -266,11 +238,11 @@ async function loadDrivers() {
         // Sort alphabetically by last name
         unique.sort((a, b) => a.last_name.localeCompare(b.last_name));
 
-        // Store for search and render with favorites
-        formAllDrivers = unique;
+        // Store for search
         window._allDrivers = unique;
+    window._driverDetailsByName = detailsByName;
 
-        applyFormFilterAndRender();
+        renderDriverCards(unique, container);
     } catch (err) {
         container.innerHTML = `<p style="text-align:center; color:#f66;">
             Could not load driver data: ${err.message}
@@ -283,21 +255,10 @@ async function loadDrivers() {
  * Renders an array of driver objects into the given container.
  */
 function renderDriverCards(drivers, container) {
+  const detailsByName = window._driverDetailsByName || new Map();
     container.innerHTML = '';
-
-    const favorites = drivers.filter(d => formFavoriteDriverNumbers.has(d.driver_number));
-    const nonFavorites = drivers.filter(d => !formFavoriteDriverNumbers.has(d.driver_number));
-    const ordered = [...favorites, ...nonFavorites];
-
-    if (favorites.length > 0) {
-        const favHeading = document.createElement('div');
-        favHeading.className = 'favorites-label';
-
-        container.appendChild(favHeading);
-    }
-
-    ordered.forEach((driver, i) => {
-        container.appendChild(buildDriverCard(driver, i));
+    drivers.forEach((driver, i) => {
+    container.appendChild(buildDriverCard(driver, i, detailsByName));
     });
 }
 
@@ -310,8 +271,25 @@ function initSearch() {
     if (!input) return;
 
     function doSearch() {
-        formCurrentQuery = input.value.trim();
-        applyFormFilterAndRender();
+        const query = input.value.trim().toLowerCase();
+        const container = document.getElementById('drivers-container');
+        const pool = window._allDrivers || [];
+
+        const filtered = query
+            ? pool.filter(d =>
+                d.full_name.toLowerCase().includes(query) ||
+                d.team_name.toLowerCase().includes(query) ||
+                d.name_acronym.toLowerCase().includes(query)
+              )
+            : pool;
+
+        renderDriverCards(filtered, container);
+
+        if (filtered.length === 0) {
+            container.innerHTML = `<p style="text-align:center; margin-top:2rem;">
+                No drivers found for "<strong>${query}</strong>"
+            </p>`;
+        }
     }
 
     input.addEventListener('input', doSearch);
@@ -349,7 +327,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Driver cards (form.html only)
-    loadFormFavorites();
     loadDrivers();
     initSearch();
 });

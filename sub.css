@@ -7,6 +7,7 @@ body {
     margin: 0;
 }
 
+/* SEARCH SECTION */
 .search-section {
     display: flex;
     justify-content: center;
@@ -19,6 +20,7 @@ input {
     padding: 10px;
     width: 45%;
     border: 1px solid #ccc;
+    color: #333;
 }
 
 .search-button {
@@ -27,53 +29,67 @@ input {
     border-radius: 8px;
     cursor: pointer;
     padding: 0 15px;
+    color: white;
 }
 
+/* CONTAINER */
 .drivers-container {
     display: flex;
     flex-direction: column;
     gap: 20px;
     width: 80%;
     margin: 0 auto;
+    padding-bottom: 50px;
 }
 
+/* CARD BASE */
 .driver-card-even, .driver-card-odd {
     display: flex;
-    align-items: center;
+    align-items: flex-start; /* Changed to start to keep layout stable during expansion */
     padding: 15px 25px;
     position: relative;
     border-radius: 4px;
     min-height: 120px;
+    transition: background 0.3s ease;
 }
 
 .driver-card-even { background-color: #4D3875; }
 .driver-card-odd { background-color: #5722CA; }
 
+/* FAVORITES */
+.favorites-label {
+    font-size: 1rem;
+    margin: 20px 0 10px 0;
+    color: #ffe680;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
 .favorite-btn {
     position: absolute;
     top: 14px;
-    right: 16px;
+    right: 45px; /* Moved slightly left to clear space for UI symmetry */
     background: transparent;
     border: none;
     cursor: pointer;
-    color: rgba(255, 255, 255, 0.75);
+    color: rgba(255, 255, 255, 0.4);
     font-size: 1.2rem;
-    opacity: 0.95;
+    transition: transform 0.2s ease, color 0.2s ease;
+    z-index: 5;
+}
+
+.favorite-btn:hover {
+    transform: scale(1.1);
 }
 
 .favorite-btn.favorited {
     color: #ffd700;
     text-shadow: 0 0 8px rgba(255, 215, 0, 0.8);
+    opacity: 1;
 }
 
-.favorites-label {
-    font-size: 1rem;
-    margin-bottom: 10px;
-    color: #ffe680;
-    font-weight: 700;
-    text-transform: uppercase;
-}
-
+/* IMAGES */
 .driver-image {
     width: 120px;
     flex-shrink: 0;
@@ -87,24 +103,34 @@ input {
     display: block;
 }
 
+/* DRIVER INFO */
 .driver-info {
     flex-grow: 1;
     padding-left: 20px;
+    padding-bottom: 10px;
 }
 
-.driver-name a {
+.driver-name, .driver-name a {
     color: white;
     text-decoration: none;
     font-size: 1.6rem;
     margin: 0;
 }
 
-.driver-description .description-text {
-    color: white !important; /* Forces team text to be white */
-    margin: 5px 0;
-    font-size: 1rem;
+.driver-name strong {
+    text-transform: uppercase;
+    font-weight: 900;
 }
 
+.driver-description .description-text, 
+.driver-description p {
+    color: white !important;
+    margin: 5px 0;
+    font-size: 1rem;
+    opacity: 0.9;
+}
+
+/* DROPDOWN UI */
 .dropdown {
     position: absolute;
     bottom: 10px;
@@ -115,25 +141,39 @@ input {
     background: #000;
     color: white;
     border: none;
-    padding: 2px 6px;
+    padding: 4px 8px;
     cursor: pointer;
-    font-size: 10px;
+    font-size: 12px;
+    border-radius: 4px;
+    transition: background 0.2s;
 }
 
+.expand-button:hover {
+    background: #333;
+}
+
+/* STATS ANIMATION - THE CRITICAL PART */
 .driver-stats {
-    margin-top: 0;
-    padding-top: 0;
-    border-top: 1px solid transparent;
     list-style: none;
-    max-height: 0;
-    opacity: 0;
-    overflow: hidden;
-    transition: max-height 0.55s ease, opacity 0.35s ease, margin-top 0.55s ease, padding-top 0.55s ease;
+    padding: 0;
+    margin: 0;
+    max-height: 0;         /* Hidden state */
+    opacity: 0;            /* Invisible state */
+    overflow: hidden;      /* Clips content */
+    border-top: 1px solid transparent;
+    transition: max-height 0.5s ease, opacity 0.4s ease, margin 0.4s ease;
 }
 
 .driver-stats.is-open {
-    margin-top: 10px;
+    max-height: 800px;     /* Allows content to show */
+    opacity: 1;            /* Fades in */
+    margin-top: 15px;
     padding-top: 10px;
-    border-top-color: rgba(255,255,255,0.2);
-    opacity: 1;
+    border-top-color: rgba(255, 255, 255, 0.2);
+}
+
+.driver-stats li {
+    margin-bottom: 8px;
+    line-height: 1.4;
+    font-size: 0.95rem;
 }
