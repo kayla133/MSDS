@@ -49,6 +49,31 @@ input {
 .driver-card-even { background-color: #4D3875; }
 .driver-card-odd { background-color: #5722CA; }
 
+.favorite-btn {
+    position: absolute;
+    top: 14px;
+    right: 16px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 1.2rem;
+    opacity: 0.95;
+}
+
+.favorite-btn.favorited {
+    color: #ffd700;
+    text-shadow: 0 0 8px rgba(255, 215, 0, 0.8);
+}
+
+.favorites-label {
+    font-size: 1rem;
+    margin-bottom: 10px;
+    color: #ffe680;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
 .driver-image {
     width: 120px;
     flex-shrink: 0;
