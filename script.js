@@ -7,259 +7,225 @@ let intervalId = null;
 const INTERVAL_MS = 2000;
 
 function setGlobalIndex(n) {
-  globalIndex = n;
-  carousels.forEach(c => c.show(globalIndex));
+    globalIndex = n;
+    carousels.forEach(c => c.show(globalIndex));
 }
 
 function startGlobalCarousel() {
-  clearInterval(intervalId);
-  intervalId = setInterval(() => {
-    setGlobalIndex(globalIndex + 1);
-  }, INTERVAL_MS);
+    if (intervalId) clearInterval(intervalId);
+    intervalId = setInterval(() => {
+        setGlobalIndex(globalIndex + 1);
+    }, INTERVAL_MS);
 }
 
 function pauseGlobalCarousel() {
-  clearInterval(intervalId);
-  intervalId = null;
+    clearInterval(intervalId);
+    intervalId = null;
 }
 
-// ===============================
-// CAROUSEL CLASS (RENDER ONLY)
-// ===============================
 class Carousel {
-  constructor(container) {
-    this.container = container;
-    this.slides = Array.from(container.querySelectorAll('.mySlides'));
-    this.dots = Array.from(container.querySelectorAll('.dot'));
-    this.prevBtn = container.querySelector('.prev');
-    this.nextBtn = container.querySelector('.next');
+    constructor(container) {
+        this.container = container;
+        this.slides = Array.from(container.querySelectorAll('.mySlides'));
+        this.dots = Array.from(container.querySelectorAll('.dot'));
+        this.prevBtn = container.querySelector('.prev');
+        this.nextBtn = container.querySelector('.next');
 
-    if (this.slides.length === 0) return;
+        if (this.slides.length === 0) return;
+        this.show(globalIndex);
 
-    // Initial render
-    this.show(globalIndex);
+        if (this.prevBtn) {
+            this.prevBtn.addEventListener('click', e => {
+                e.preventDefault();
+                setGlobalIndex(globalIndex - 1);
+            });
+        }
+        if (this.nextBtn) {
+            this.nextBtn.addEventListener('click', e => {
+                e.preventDefault();
+                setGlobalIndex(globalIndex + 1);
+            });
+        }
+        this.dots.forEach((dot, i) => {
+            dot.addEventListener('click', () => setGlobalIndex(i + 1));
+        });
 
-    // Prev / Next buttons
-    if (this.prevBtn) {
-      this.prevBtn.addEventListener('click', e => {
-        e.preventDefault();
-        setGlobalIndex(globalIndex - 1);
-      });
+        this.container.addEventListener('mouseenter', pauseGlobalCarousel);
+        this.container.addEventListener('mouseleave', startGlobalCarousel);
     }
 
-    if (this.nextBtn) {
-      this.nextBtn.addEventListener('click', e => {
-        e.preventDefault();
-        setGlobalIndex(globalIndex + 1);
-      });
+    show(n) {
+        let index = n;
+        if (index > this.slides.length) index = 1;
+        if (index < 1) index = this.slides.length;
+        this.slides.forEach(s => (s.style.display = 'none'));
+        this.dots.forEach(d => d.classList.remove('active'));
+        if (this.slides[index - 1]) this.slides[index - 1].style.display = 'block';
+        if (this.dots[index - 1]) this.dots[index - 1].classList.add('active');
     }
-
-    // Dots
-    this.dots.forEach((dot, i) => {
-      dot.addEventListener('click', () => {
-        setGlobalIndex(i + 1);
-      });
-    });
-
-    // Pause ALL carousels on hover
-    this.container.addEventListener('mouseenter', pauseGlobalCarousel);
-    this.container.addEventListener('mouseleave', startGlobalCarousel);
-  }
-
-  show(n) {
-    let index = n;
-
-    if (index > this.slides.length) index = 1;
-    if (index < 1) index = this.slides.length;
-
-    this.slides.forEach(s => (s.style.display = 'none'));
-    this.dots.forEach(d => d.classList.remove('active'));
-
-    this.slides[index - 1].style.display = 'block';
-    if (this.dots[index - 1]) {
-      this.dots[index - 1].classList.add('active');
-    }
-  }
 }
 
 // ===============================
-// INITIALIZATION
+// ROUTING & PAGE DETECTION
 // ===============================
-document.addEventListener('DOMContentLoaded', () => {
-  const containers = Array.from(document.querySelectorAll('section'))
-    .filter(sec => sec.querySelectorAll('.mySlides').length > 0);
+// This is the "equation" that detects the page context
+const isNascarPage = window.location.pathname.includes('nascar.html');
+const CONFIG = isNascarPage ? {
+    dataFile: 'nascar.json',
+    detailsFile: null, // NASCAR often includes all data in one file
+    storageKey: 'nascarFavorites',
+    type: 'NASCAR'
+} : {
+    dataFile: 'form.json',
+    detailsFile: 'form-driver-details.json',
+    storageKey: 'f1Favorites',
+    type: 'F1'
+};
 
-  carousels = containers.map(container => new Carousel(container));
-  startGlobalCarousel();
-});
-
 // ===============================
-// BACKWARD-COMPATIBILITY NO-OPS
+// NAVIGATION & HELPERS
 // ===============================
-function plusSlides() {}
-function currentSlide() {}
-
-// ===============================
-// NAVIGATION MENU
-// ===============================
-
 const navItems = [
     { label: "Formula 1", href: "form.html" },
     { label: "NASCAR",    href: "nascar.html" }
 ];
 
 function normalizeDriverName(name = '') {
-  return name.toLowerCase().replace(/\s+/g, ' ').trim();
+    return name.toLowerCase().replace(/\s+/g, ' ').trim();
 }
 
+// ===============================
+// LOCAL STORAGE / FAVORITES
+// ===============================
+let favoriteDriverNumbers = new Set();
+
+function loadFavorites() {
+    const stored = localStorage.getItem(CONFIG.storageKey);
+    if (stored) {
+        try {
+            favoriteDriverNumbers = new Set(JSON.parse(stored));
+        } catch (e) { console.error("Error loading favorites", e); }
+    }
+}
+
+function saveFavorites() {
+    localStorage.setItem(CONFIG.storageKey, JSON.stringify([...favoriteDriverNumbers]));
+}
 
 // ===============================
 // DRIVER CARD RENDERING
 // ===============================
-
-/**
- * Builds a single driver card article element.
- * @param {Object} driver - Driver data object from form.json
- * @param {number} index  - Zero-based position (determines even/odd styling)
- * @returns {HTMLElement}
- */
 function buildDriverCard(driver, index, detailsByName) {
+    const isFavorite = favoriteDriverNumbers.has(driver.driver_number);
     const cardClass = index % 2 === 0 ? 'driver-card-even' : 'driver-card-odd';
-    const anchorId = driver.full_name.toLowerCase().replace(/\s+/g, '-');
+    
+    // Logic to handle different name formats between F1 and NASCAR JSONs
+    const fullName = driver.full_name || `${driver.first_name} ${driver.last_name}`;
+    const anchorId = fullName.toLowerCase().replace(/\s+/g, '-');
     const teamColour = driver.team_colour ? `#${driver.team_colour}` : '#888';
-  const details = detailsByName.get(normalizeDriverName(driver.full_name)) || {};
-  const wdc = Number.isFinite(details.number_of_wdc) ? details.number_of_wdc : 'N/A';
-  const seasons = Number.isFinite(details.number_of_seasons) ? details.number_of_seasons : 'N/A';
-  const pastTeams = Array.isArray(details.past_teams) && details.past_teams.length > 0
-    ? details.past_teams.join(', ')
-    : 'None listed';
-  const description = details.description || 'No description available.';
+    
+    // Detail lookup
+    const details = detailsByName.get(normalizeDriverName(fullName)) || {};
+    const wdc = driver.championships ?? details.number_of_wdc ?? '0';
+    const seasons = driver.seasons ?? details.number_of_seasons ?? 'N/A';
+    const pastTeams = (driver.past_teams?.length > 0) ? driver.past_teams.join(', ') : 
+                      (details.past_teams?.length > 0) ? details.past_teams.join(', ') : 'None listed';
 
     const article = document.createElement('article');
-    article.className = cardClass;
+    article.className = `driver-card ${cardClass}`;
     article.id = anchorId;
 
     article.innerHTML = `
         <div class="driver-image">
-            <img src="${driver.headshot_url}"
-                 alt="${driver.full_name} Formula One Driver"
-                 class="driver-photo"
-                 onerror="this.src='images/logo.png'">
+            <img src="${driver.headshot_url}" alt="${fullName}" class="driver-photo" onerror="this.src='images/logo.png'">
         </div>
         <div class="driver-info">
+            <button class="favorite-btn ${isFavorite ? 'favorited' : ''}" title="Toggle Favorite" style="float:right; border:none; background:none; cursor:pointer; font-size:1.5rem;">
+                ${isFavorite ? '★' : '☆'}
+            </button>
             <h2 class="driver-name">
-                <a href="#${anchorId}">${driver.full_name}</a>
+                <a href="#${anchorId}">${fullName}</a>
             </h2>
-            <p class="driver-team" style="color:${teamColour}; font-weight:bold; margin: 4px 0;">
-                ${driver.team_name}
-            </p>
+            <p class="driver-team" style="color:${teamColour}; font-weight:bold;">${driver.team_name}</p>
             <div class="driver-description">
-                <p class="description-text">No. ${driver.driver_number} &mdash; ${driver.name_acronym}</p>
+                <p class="description-text">No. ${driver.driver_number} ${driver.name_acronym ? '&mdash; ' + driver.name_acronym : ''}</p>
             </div>
-            <ul class="driver-stats">
-              <li class="stat-item">Number of World Drivers' Championships: ${wdc}</li>
-              <li class="stat-item">Number of Seasons: ${seasons}</li>
-              <li class="stat-item">Past Teams: ${pastTeams}</li>
-              <li class="stat-item">Description: ${description}</li>
+            <ul class="driver-stats" style="max-height: 0px; overflow: hidden; transition: max-height 0.3s ease;">
+              <li><strong>Championships:</strong> ${wdc}</li>
+              <li><strong>Seasons:</strong> ${seasons}</li>
+              <li><strong>Past Teams:</strong> ${pastTeams}</li>
+              <li><strong>Bio:</strong> ${driver.description || details.description || 'N/A'}</li>
             </ul>
             <div class="dropdown">
-                <button class="expand-button" aria-label="Expand driver details" aria-expanded="false">
-                    <span class="expand-icon">▼</span>
-                </button>
+                <button class="expand-button" aria-expanded="false"><span class="expand-icon">▼</span></button>
             </div>
         </div>
     `;
 
-    // Expand/collapse toggle with smooth slide animation
+    article.querySelector('.favorite-btn').addEventListener('click', () => {
+        if (favoriteDriverNumbers.has(driver.driver_number)) {
+            favoriteDriverNumbers.delete(driver.driver_number);
+        } else {
+            favoriteDriverNumbers.add(driver.driver_number);
+        }
+        saveFavorites();
+        renderDriverCards(window._allDrivers, document.getElementById('drivers-container'));
+    });
+
     const btn = article.querySelector('.expand-button');
     const stats = article.querySelector('.driver-stats');
-    stats.classList.remove('is-open');
-    stats.style.maxHeight = '0px';
-    const expandedMaxHeight = '1500px';
-
     btn.addEventListener('click', () => {
         const isOpen = btn.getAttribute('aria-expanded') === 'true';
-        const nextOpen = !isOpen;
-
-        btn.setAttribute('aria-expanded', String(nextOpen));
-        btn.querySelector('.expand-icon').textContent = nextOpen ? '▲' : '▼';
-
-        if (nextOpen) {
-            stats.classList.add('is-open');
-          stats.style.maxHeight = expandedMaxHeight;
-            return;
-        }
-
-        stats.style.maxHeight = '0px';
-        stats.classList.remove('is-open');
+        btn.setAttribute('aria-expanded', !isOpen);
+        btn.querySelector('.expand-icon').textContent = isOpen ? '▼' : '▲';
+        stats.style.maxHeight = isOpen ? '0px' : '1000px';
     });
 
     return article;
 }
 
-/**
- * Fetches form.json and renders all driver cards into #drivers-container.
- * Also stores the full driver list for search filtering.
- */
-async function loadDrivers() {
-    const container = document.getElementById('drivers-container');
-    if (!container) return; // Not on the drivers page
+function renderDriverCards(drivers, container) {
+    if (!container) return;
+    const detailsByName = window._driverDetailsByName || new Map();
+    container.innerHTML = '';
 
-    try {
-    const [driversResponse, detailsResponse] = await Promise.all([
-      fetch('form.json'),
-      fetch('form-driver-details.json')
-    ]);
+    const favs = drivers.filter(d => favoriteDriverNumbers.has(d.driver_number));
+    const others = drivers.filter(d => !favoriteDriverNumbers.has(d.driver_number));
+    const sorted = [...favs, ...others];
 
-    if (!driversResponse.ok) {
-      throw new Error(`Failed to load form.json (${driversResponse.status})`);
-    }
-    if (!detailsResponse.ok) {
-      throw new Error(`Failed to load form-driver-details.json (${detailsResponse.status})`);
-    }
 
-    const [drivers, details] = await Promise.all([
-      driversResponse.json(),
-      detailsResponse.json()
-    ]);
-
-    const detailsByName = new Map(
-      details.map(d => [normalizeDriverName(d.full_name), d])
-    );
-
-        // Deduplicate by driver_number (keep first occurrence)
-        const seen = new Set();
-        const unique = drivers.filter(d => {
-            if (seen.has(d.driver_number)) return false;
-            seen.add(d.driver_number);
-            return true;
-        });
-
-        // Sort alphabetically by last name
-        unique.sort((a, b) => a.last_name.localeCompare(b.last_name));
-
-        // Store for search
-        window._allDrivers = unique;
-    window._driverDetailsByName = detailsByName;
-
-        renderDriverCards(unique, container);
-    } catch (err) {
-        container.innerHTML = `<p style="text-align:center; color:#f66;">
-            Could not load driver data: ${err.message}
-        </p>`;
-        console.error(err);
-    }
+    sorted.forEach((d, i) => container.appendChild(buildDriverCard(d, i, detailsByName)));
 }
 
-/**
- * Renders an array of driver objects into the given container.
- */
-function renderDriverCards(drivers, container) {
-  const detailsByName = window._driverDetailsByName || new Map();
-    container.innerHTML = '';
-    drivers.forEach((driver, i) => {
-    container.appendChild(buildDriverCard(driver, i, detailsByName));
-    });
+async function loadDrivers() {
+    const container = document.getElementById('drivers-container');
+    if (!container) return;
+    loadFavorites();
+
+    try {
+        const fetches = [fetch(CONFIG.dataFile)];
+        if (CONFIG.detailsFile) fetches.push(fetch(CONFIG.detailsFile));
+
+        const responses = await Promise.all(fetches);
+        const data = await Promise.all(responses.map(r => r.json()));
+
+        const drivers = data[0];
+        const details = data[1] || [];
+
+        window._driverDetailsByName = new Map(details.map(d => [normalizeDriverName(d.full_name), d]));
+        
+        const seen = new Set();
+        window._allDrivers = drivers.filter(d => !seen.has(d.driver_number) && seen.add(d.driver_number))
+                                    .sort((a, b) => {
+                                        const nameA = a.last_name || "";
+                                        const nameB = b.last_name || "";
+                                        return nameA.localeCompare(nameB);
+                                    });
+
+        renderDriverCards(window._allDrivers, container);
+    } catch (err) {
+        console.error("Data load error", err);
+    }
 }
 
 // ===============================
@@ -267,47 +233,26 @@ function renderDriverCards(drivers, container) {
 // ===============================
 function initSearch() {
     const input = document.getElementById('driver-search');
-    const btn   = document.getElementById('search-btn');
     if (!input) return;
 
-    function doSearch() {
-        const query = input.value.trim().toLowerCase();
-        const container = document.getElementById('drivers-container');
-        const pool = window._allDrivers || [];
-
-        const filtered = query
-            ? pool.filter(d =>
-                d.full_name.toLowerCase().includes(query) ||
-                d.team_name.toLowerCase().includes(query) ||
-                d.name_acronym.toLowerCase().includes(query)
-              )
-            : pool;
-
-        renderDriverCards(filtered, container);
-
-        if (filtered.length === 0) {
-            container.innerHTML = `<p style="text-align:center; margin-top:2rem;">
-                No drivers found for "<strong>${query}</strong>"
-            </p>`;
-        }
-    }
-
-    input.addEventListener('input', doSearch);
-    btn.addEventListener('click', doSearch);
-    input.addEventListener('keydown', e => { if (e.key === 'Enter') doSearch(); });
+    input.addEventListener('input', () => {
+        const query = input.value.toLowerCase();
+        const filtered = window._allDrivers.filter(d => {
+            const fullName = d.full_name || `${d.first_name} ${d.last_name}`;
+            return fullName.toLowerCase().includes(query) || d.team_name.toLowerCase().includes(query);
+        });
+        renderDriverCards(filtered, document.getElementById('drivers-container'));
+    });
 }
 
 // ===============================
 // INITIALIZATION
 // ===============================
 document.addEventListener('DOMContentLoaded', () => {
-    // Carousels (index.html only)
-    const containers = Array.from(document.querySelectorAll('section'))
-        .filter(sec => sec.querySelectorAll('.mySlides').length > 0);
-    carousels = containers.map(container => new Carousel(container));
+    const containers = Array.from(document.querySelectorAll('section')).filter(s => s.querySelector('.mySlides'));
+    carousels = containers.map(c => new Carousel(c));
     if (carousels.length > 0) startGlobalCarousel();
 
-    // Navigation menu
     const navList = document.getElementById('nav-list');
     if (navList) {
         navItems.forEach(({ label, href }) => {
@@ -326,42 +271,30 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Driver cards (form.html only)
     loadDrivers();
     initSearch();
 });
 
 // ===============================
-// BACKWARD-COMPATIBILITY NO-OPS
-// ===============================
-function plusSlides() {}
-function currentSlide() {}
 // MODAL LOGIC
+// ===============================
 const modal = document.getElementById('contact-modal');
 const openBtn = document.getElementById('open-contact');
 const closeBtn = document.querySelector('.close-btn');
 
-// OPEN
-openBtn.addEventListener('click', () => {
-    modal.style.display = 'block';
-});
-
-// CLOSE (X button)
-closeBtn.addEventListener('click', () => {
-    modal.style.display = 'none';
-});
-
-// CLOSE (click outside)
-window.addEventListener('click', (e) => {
-    if (e.target === modal) {
+if (openBtn && modal) {
+    openBtn.addEventListener('click', () => modal.style.display = 'block');
+    closeBtn.addEventListener('click', () => modal.style.display = 'none');
+    window.addEventListener('click', (e) => {
+        if (e.target === modal) modal.style.display = 'none';
+    });
+    document.getElementById('contact-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        alert("Message sent!");
         modal.style.display = 'none';
-    }
-});
+        this.reset();
+    });
+}
 
-// FORM SUBMIT (basic demo)
-document.getElementById('contact-form').addEventListener('submit', function(e) {
-    e.preventDefault();
-    alert("Message sent! (You can connect this to backend later)");
-    modal.style.display = 'none';
-    this.reset();
-});
+function plusSlides() {}
+function currentSlide() {}
