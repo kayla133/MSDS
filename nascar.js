@@ -1,47 +1,77 @@
 /**
- * NASCAR DRIVER CARDS & SHARED NAVIGATION
+ * NASCAR DRIVER CARDS & SEARCH
  */
 
 let allDrivers = [];
 let favoriteDriverNumbers = new Set();
 let currentQuery = '';
 
-// --- 1. NAVIGATION MENU (Matching script.js) ---
-function setupNavigation() {
-    const burgerBtn = document.getElementById('burger-btn');
-    const burgerNav = document.getElementById('burger-nav');
-    const navList = document.getElementById('nav-list');
+const navItems = [
+    { label: 'Formula 1', href: 'form.html' },
+    { label: 'NASCAR', href: 'nascar.html' }
+];
 
-    // Define links to match your project structure
-    const links = [
-        { name: 'Formula 1', url: 'form.html' },
-        { name: 'NASCAR', url: 'nascar.html' }
-    ];
+function parseStarredParam(value) {
+    if (!value) return new Set();
 
-    // Populate the navigation list
-    if (navList) {
-        navList.innerHTML = links
-            .map(link => `<li><a href="${link.url}">${link.name}</a></li>`)
-            .join('');
+    return new Set(
+        value
+            .split(',')
+            .map(num => Number.parseInt(num, 10))
+            .filter(num => Number.isInteger(num) && num >= 0)
+    );
+}
+
+function syncUrlWithState() {
+    const params = new URLSearchParams(window.location.search);
+
+    if (currentQuery) {
+        params.set('q', currentQuery);
+    } else {
+        params.delete('q');
     }
 
-    // Toggle menu open/close
-    if (burgerBtn && burgerNav) {
-        burgerBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            burgerNav.classList.toggle('open');
-        });
+    if (favoriteDriverNumbers.size > 0) {
+        const starred = [...favoriteDriverNumbers].sort((a, b) => a - b).join(',');
+        params.set('starred', starred);
+    } else {
+        params.delete('starred');
+    }
 
-        // Close menu when clicking anywhere else
-        document.addEventListener('click', (e) => {
-            if (!burgerNav.contains(e.target) && !burgerBtn.contains(e.target)) {
-                burgerNav.classList.remove('open');
-            }
-        });
+    const queryString = params.toString();
+    const nextUrl = queryString
+        ? `${window.location.pathname}?${queryString}`
+        : window.location.pathname;
+
+    window.history.replaceState({}, '', nextUrl);
+}
+
+function applyStateFromUrl() {
+    const params = new URLSearchParams(window.location.search);
+    const q = params.get('q');
+    const starred = params.get('starred');
+
+    if (typeof q === 'string') {
+        currentQuery = q.trim().toLowerCase();
+    }
+
+    if (starred !== null) {
+        favoriteDriverNumbers = parseStarredParam(starred);
     }
 }
 
-// --- 2. FAVORITES PERSISTENCE ---
+function getFilteredDrivers() {
+    if (!currentQuery) return allDrivers;
+
+    return allDrivers.filter(d => {
+        const fullName = `${d.first_name} ${d.last_name}`.toLowerCase();
+        return fullName.includes(currentQuery) ||
+            d.team_name.toLowerCase().includes(currentQuery) ||
+            d.driver_number.toString().includes(currentQuery);
+    });
+}
+
+// Load Favorites from LocalStorage
 function loadFavorites() {
     const stored = localStorage.getItem('nascarFavorites');
     if (stored) {
@@ -51,57 +81,68 @@ function loadFavorites() {
     }
 }
 
+// Save Favorites to LocalStorage
 function saveFavorites() {
     localStorage.setItem('nascarFavorites', JSON.stringify([...favoriteDriverNumbers]));
 }
 
-// --- 3. DATA LOADING & RENDERING ---
 async function init() {
-    // Initialize Menu and Favorites
-    setupNavigation();
     loadFavorites();
+    applyStateFromUrl();
 
     const container = document.getElementById('drivers-container');
     const searchInput = document.getElementById('driver-search');
 
+    if (searchInput) {
+        searchInput.value = currentQuery;
+    }
+
     try {
         const response = await fetch('nascar.json');
-        if (!response.ok) throw new Error("Failed to fetch nascar.json");
-        
         allDrivers = await response.json();
         
-        // Sort Alphabetically by Last Name
+        // Initial Sort: Alphabetical by Last Name
         allDrivers.sort((a, b) => a.last_name.localeCompare(b.last_name));
-        
-        renderCards(allDrivers);
 
-        // Search functionality
+        renderCards(getFilteredDrivers(), currentQuery);
+        syncUrlWithState();
+
         if (searchInput) {
             searchInput.addEventListener('input', () => {
                 currentQuery = searchInput.value.trim().toLowerCase();
-                const filtered = allDrivers.filter(d => {
-                    const fullName = `${d.first_name} ${d.last_name}`.toLowerCase();
-                    return fullName.includes(currentQuery) || 
-                           d.team_name.toLowerCase().includes(currentQuery) ||
-                           d.driver_number.toString().includes(currentQuery);
-                });
-                renderCards(filtered);
+                renderCards(getFilteredDrivers(), currentQuery);
+                syncUrlWithState();
             });
         }
+
+        window.addEventListener('popstate', () => {
+            applyStateFromUrl();
+            if (searchInput) {
+                searchInput.value = currentQuery;
+            }
+            renderCards(getFilteredDrivers(), currentQuery);
+        });
     } catch (e) {
         console.error("Data load error", e);
     }
 }
 
-function renderCards(drivers) {
+function renderCards(drivers, query = '') {
     const container = document.getElementById('drivers-container');
     if (!container) return;
     container.innerHTML = '';
 
-    // Favorites sorted to the top
+    // Sort strategy: Favorites at the top
     const favs = drivers.filter(d => favoriteDriverNumbers.has(d.driver_number));
     const others = drivers.filter(d => !favoriteDriverNumbers.has(d.driver_number));
     const sorted = [...favs, ...others];
+
+    if (favs.length > 0 && query === '') {
+        const label = document.createElement('div');
+        label.className = 'favorites-label';
+        label.textContent = "Starred Drivers";
+        container.appendChild(label);
+    }
 
     sorted.forEach((d, i) => {
         container.appendChild(buildCard(d, i));
@@ -126,35 +167,38 @@ function buildCard(driver, index) {
             </button>
             <h2 class="driver-name">${driver.first_name} <strong>${driver.last_name}</strong></h2>
             <div class="driver-description">
-                <p class="description-text" style="border-left: 4px solid ${teamColour}; padding-left: 8px;">
-                    ${driver.team_name} | No. ${driver.driver_number}
-                </p>
+                <p class="description-text">${driver.team_name} | No. ${driver.driver_number}</p>
             </div>
             <ul class="driver-stats">
                 <li><strong>Championships:</strong> ${driver.championships}</li>
                 <li><strong>Seasons:</strong> ${driver.seasons}</li>
                 <li><strong>Past Teams:</strong> ${driver.past_teams.length > 0 ? driver.past_teams.join(', ') : 'None'}</li>
-                <li><strong>Bio:</strong> ${driver.description}</li>
+                <li><strong>Description:</strong> ${driver.description}</li>
             </ul>
-            <div class="dropdown">
-                <button class="expand-button" aria-expanded="false">
-                    <span class="expand-icon">▼</span>
-                </button>
-            </div>
+        </div>
+        <div class="dropdown">
+            <button class="expand-button" aria-expanded="false">
+                <span class="expand-icon">▼</span>
+            </button>
         </div>
     `;
 
-    // Dropdown Toggle
+    // Dropdown Toggle Logic
     const btn = article.querySelector('.expand-button');
     const stats = article.querySelector('.driver-stats');
     
     btn.addEventListener('click', () => {
-        const isOpen = stats.classList.toggle('is-open');
-        btn.setAttribute('aria-expanded', isOpen);
-        btn.querySelector('.expand-icon').textContent = isOpen ? '▲' : '▼';
+        const isOpen = stats.classList.contains('is-open');
+        
+        // Toggle the class for CSS animation
+        stats.classList.toggle('is-open', !isOpen);
+        
+        // Update attributes and icons
+        btn.setAttribute('aria-expanded', !isOpen);
+        btn.querySelector('.expand-icon').textContent = isOpen ? '▼' : '▲';
     });
 
-    // Favorite Toggle
+    // Favorite Toggle Logic
     article.querySelector('.favorite-btn').addEventListener('click', () => {
         if (favoriteDriverNumbers.has(driver.driver_number)) {
             favoriteDriverNumbers.delete(driver.driver_number);
@@ -162,10 +206,34 @@ function buildCard(driver, index) {
             favoriteDriverNumbers.add(driver.driver_number);
         }
         saveFavorites();
-        renderCards(allDrivers);
+        renderCards(getFilteredDrivers(), currentQuery);
+        syncUrlWithState();
     });
 
     return article;
 }
 
 document.addEventListener('DOMContentLoaded', init);
+
+document.addEventListener('DOMContentLoaded', () => {
+    const navList = document.getElementById('nav-list');
+    if (navList) {
+        navItems.forEach(({ label, href }) => {
+            navList.innerHTML += `<li><a href="${href}">${label}</a></li>`;
+        });
+    }
+
+    const burgerBtn = document.getElementById('burger-btn');
+    const burgerNav = document.getElementById('burger-nav');
+
+    if (burgerBtn && burgerNav) {
+        burgerBtn.addEventListener('click', e => {
+            e.stopPropagation();
+            burgerNav.classList.toggle('open');
+        });
+
+        document.addEventListener('click', () => {
+            burgerNav.classList.remove('open');
+        });
+    }
+});

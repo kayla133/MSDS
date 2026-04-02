@@ -98,6 +98,70 @@ function normalizeDriverName(name = '') {
 // LOCAL STORAGE / FAVORITES
 // ===============================
 let favoriteDriverNumbers = new Set();
+let currentQuery = '';
+
+function parseStarredParam(value) {
+    if (!value) return new Set();
+
+    return new Set(
+        value
+            .split(',')
+            .map(num => Number.parseInt(num, 10))
+            .filter(num => Number.isInteger(num) && num >= 0)
+    );
+}
+
+function syncUrlWithState() {
+    const params = new URLSearchParams(window.location.search);
+
+    if (currentQuery) {
+        params.set('q', currentQuery);
+    } else {
+        params.delete('q');
+    }
+
+    if (favoriteDriverNumbers.size > 0) {
+        const starred = [...favoriteDriverNumbers].sort((a, b) => a - b).join(',');
+        params.set('starred', starred);
+    } else {
+        params.delete('starred');
+    }
+
+    const queryString = params.toString();
+    const nextUrl = queryString
+        ? `${window.location.pathname}?${queryString}`
+        : window.location.pathname;
+
+    window.history.replaceState({}, '', nextUrl);
+}
+
+function applyStateFromUrl() {
+    const params = new URLSearchParams(window.location.search);
+    const q = params.get('q');
+    const starred = params.get('starred');
+
+    if (typeof q === 'string') {
+        currentQuery = q.trim().toLowerCase();
+    } else {
+        currentQuery = '';
+    }
+
+    if (starred !== null) {
+        favoriteDriverNumbers = parseStarredParam(starred);
+    }
+}
+
+function getFilteredDrivers() {
+    const allDrivers = window._allDrivers || [];
+    if (!currentQuery) return allDrivers;
+
+    return allDrivers.filter(d => {
+        const fullName = d.full_name || `${d.first_name} ${d.last_name}`;
+        return fullName.toLowerCase().includes(currentQuery) ||
+            d.team_name.toLowerCase().includes(currentQuery) ||
+            d.driver_number.toString().includes(currentQuery);
+    });
+}
 
 function loadFavorites() {
     const stored = localStorage.getItem(CONFIG.storageKey);
@@ -128,6 +192,7 @@ function buildDriverCard(driver, index, detailsByName) {
     const details = detailsByName.get(normalizeDriverName(fullName)) || {};
     const wdc = driver.championships ?? details.number_of_wdc ?? '0';
     const seasons = driver.seasons ?? details.number_of_seasons ?? 'N/A';
+    const bio = driver.description || details.description || 'N/A';
     const pastTeams = (driver.past_teams?.length > 0) ? driver.past_teams.join(', ') : 
                       (details.past_teams?.length > 0) ? details.past_teams.join(', ') : 'None listed';
 
@@ -150,11 +215,11 @@ function buildDriverCard(driver, index, detailsByName) {
             <div class="driver-description">
                 <p class="description-text">No. ${driver.driver_number} ${driver.name_acronym ? '&mdash; ' + driver.name_acronym : ''}</p>
             </div>
-            <ul class="driver-stats" style="max-height: 0px; overflow: hidden; transition: max-height 0.3s ease;">
+                        <ul class="driver-stats">
               <li><strong>Championships:</strong> ${wdc}</li>
               <li><strong>Seasons:</strong> ${seasons}</li>
               <li><strong>Past Teams:</strong> ${pastTeams}</li>
-              <li><strong>Bio:</strong> ${driver.description || details.description || 'N/A'}</li>
+                            <li><strong>Bio:</strong> ${bio}</li>
             </ul>
             <div class="dropdown">
                 <button class="expand-button" aria-expanded="false"><span class="expand-icon">▼</span></button>
@@ -169,7 +234,8 @@ function buildDriverCard(driver, index, detailsByName) {
             favoriteDriverNumbers.add(driver.driver_number);
         }
         saveFavorites();
-        renderDriverCards(window._allDrivers, document.getElementById('drivers-container'));
+        renderDriverCards(getFilteredDrivers(), document.getElementById('drivers-container'));
+        syncUrlWithState();
     });
 
     const btn = article.querySelector('.expand-button');
@@ -178,7 +244,7 @@ function buildDriverCard(driver, index, detailsByName) {
         const isOpen = btn.getAttribute('aria-expanded') === 'true';
         btn.setAttribute('aria-expanded', !isOpen);
         btn.querySelector('.expand-icon').textContent = isOpen ? '▼' : '▲';
-        stats.style.maxHeight = isOpen ? '0px' : '1000px';
+        stats.classList.toggle('is-open', !isOpen);
     });
 
     return article;
@@ -201,6 +267,12 @@ async function loadDrivers() {
     const container = document.getElementById('drivers-container');
     if (!container) return;
     loadFavorites();
+    applyStateFromUrl();
+
+    const searchInput = document.getElementById('driver-search');
+    if (searchInput) {
+        searchInput.value = currentQuery;
+    }
 
     try {
         const fetches = [fetch(CONFIG.dataFile)];
@@ -222,7 +294,8 @@ async function loadDrivers() {
                                         return nameA.localeCompare(nameB);
                                     });
 
-        renderDriverCards(window._allDrivers, container);
+        renderDriverCards(getFilteredDrivers(), container);
+        syncUrlWithState();
     } catch (err) {
         console.error("Data load error", err);
     }
@@ -235,13 +308,12 @@ function initSearch() {
     const input = document.getElementById('driver-search');
     if (!input) return;
 
+    input.value = currentQuery;
+
     input.addEventListener('input', () => {
-        const query = input.value.toLowerCase();
-        const filtered = window._allDrivers.filter(d => {
-            const fullName = d.full_name || `${d.first_name} ${d.last_name}`;
-            return fullName.toLowerCase().includes(query) || d.team_name.toLowerCase().includes(query);
-        });
-        renderDriverCards(filtered, document.getElementById('drivers-container'));
+        currentQuery = input.value.trim().toLowerCase();
+        renderDriverCards(getFilteredDrivers(), document.getElementById('drivers-container'));
+        syncUrlWithState();
     });
 }
 
@@ -273,6 +345,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     loadDrivers();
     initSearch();
+
+    window.addEventListener('popstate', () => {
+        applyStateFromUrl();
+        const input = document.getElementById('driver-search');
+        if (input) {
+            input.value = currentQuery;
+        }
+        renderDriverCards(getFilteredDrivers(), document.getElementById('drivers-container'));
+    });
 });
 
 // ===============================
