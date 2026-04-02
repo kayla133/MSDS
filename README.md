@@ -36,4 +36,3 @@ List the technologies used:
 ### Formula 1 Json
 
 - https://openf1.org/
-- 
