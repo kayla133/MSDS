@@ -137,12 +137,6 @@ function renderCards(drivers, query = '') {
     const others = drivers.filter(d => !favoriteDriverNumbers.has(d.driver_number));
     const sorted = [...favs, ...others];
 
-    if (favs.length > 0 && query === '') {
-        const label = document.createElement('div');
-        label.className = 'favorites-label';
-        label.textContent = "Starred Drivers";
-        container.appendChild(label);
-    }
 
     sorted.forEach((d, i) => {
         container.appendChild(buildCard(d, i));
@@ -163,7 +157,7 @@ function buildCard(driver, index) {
         </div>
         <div class="driver-info">
             <button class="favorite-btn ${isFavorite ? 'favorited' : ''}" title="Toggle Favorite">
-                <i class="${isFavorite ? 'fa-solid' : 'fa-regular'} fa-star"></i>
+                ${isFavorite ? '★' : '☆'}
             </button>
             <h2 class="driver-name">${driver.first_name} <strong>${driver.last_name}</strong></h2>
             <div class="driver-description">
