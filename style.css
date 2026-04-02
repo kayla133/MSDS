@@ -250,3 +250,58 @@ footer {
   cursor: pointer;
 }
 
+@media screen and (max-width: 768px) {
+    /* 1. Header: Show ONLY the logo, centered */
+    .header {
+        display: flex; /* Switch to flex for easier centering */
+        justify-content: center;
+        padding: 15px 0;
+    }
+
+    .header h1, 
+    .burger {
+        display: none !important; /* Remove the text and the menu button */
+    }
+
+    /* 2. Hide all slideshow mechanics and images */
+    .mySlides img, 
+    .prev, 
+    .next, 
+    .dot, 
+    br {
+        display: none !important;
+    }
+
+    /* 3. Transform the first 'Slide' of each section into a clean button */
+    .f1, .nascar {
+        margin: 15px auto;
+        width: 90%;
+    }
+
+    .mySlides {
+        display: block !important;
+    }
+
+    /* Keep only one link per category */
+    .mySlides:not(:first-of-type) {
+        display: none !important;
+    }
+
+    /* 4. Style the Link Blocks (The old 'Overlay') */
+    .text {
+        position: static; /* No longer floating over an image */
+        background-color: #3b3753; /* NASCAR/F1 red for a call-to-action look */
+        border-radius: 8px;
+        text-align: center;
+        padding: 40px 20px; /* Big touch targets for mobile users */
+        box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    }
+
+    .text a {
+        font-size: 26px;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        display: block;
+    }
+}
