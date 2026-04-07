@@ -362,19 +362,44 @@ document.addEventListener('DOMContentLoaded', () => {
 const modal = document.getElementById('contact-modal');
 const openBtn = document.getElementById('open-contact');
 const closeBtn = document.querySelector('.close-btn');
+const contactForm = document.getElementById('contact-form');
 
 if (openBtn && modal) {
-    openBtn.addEventListener('click', () => modal.style.display = 'block');
-    closeBtn.addEventListener('click', () => modal.style.display = 'none');
+    // 1. Open Modal
+    openBtn.addEventListener('click', () => {
+        modal.style.display = 'block';
+    });
+
+    // 2. Close Modal (via X button)
+    if (closeBtn) {
+        closeBtn.addEventListener('click', () => {
+            modal.style.display = 'none';
+        });
+    }
+
+    // 3. Close Modal (via clicking the dark background overlay)
     window.addEventListener('click', (e) => {
-        if (e.target === modal) modal.style.display = 'none';
+        if (e.target === modal) {
+            modal.style.display = 'none';
+        }
     });
-    document.getElementById('contact-form').addEventListener('submit', function(e) {
-        e.preventDefault();
-        alert("Message sent!");
-        modal.style.display = 'none';
-        this.reset();
+
+    // 4. Close Modal (via Escape Key)
+    window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.style.display === 'block') {
+            modal.style.display = 'none';
+        }
     });
+
+    // 5. Handle Form Submission
+    if (contactForm) {
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert("Message sent!");
+            modal.style.display = 'none';
+            this.reset();
+        });
+    }
 }
 
 function plusSlides() {}
